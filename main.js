@@ -126,7 +126,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _ass
   \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"ship\": () => (/* binding */ ship)\n/* harmony export */ });\nconst ship = (() => {\n    const testMethod = (a, b) => a + b;\n\n    return {\n        testMethod,\n    };\n})();\n\n\n//# sourceURL=webpack://battleship/./src/modules/ship.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"ship\": () => (/* binding */ ship)\n/* harmony export */ });\nconst ship = (() => {\n    const testMethod = (a, b) => a + b;\n\n    const factory = () => {};\n\n    return {\n        testMethod,\n    };\n})();\n\n\n//# sourceURL=webpack://battleship/./src/modules/ship.js?");
 
 /***/ })
 

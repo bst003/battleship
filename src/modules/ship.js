@@ -3,17 +3,25 @@ export const Ship = (shipLength, shipName) => {
     const _length = shipLength;
     const _name = shipName;
 
-    const _getHits = () => _hits;
+    const getHits = () => _hits;
 
     const hit = () => {
         _hits++;
     };
 
+    const isSunk = () => {
+        if (_hits === _length) {
+            return true;
+        }
+        return false;
+    };
+
     const testMethod = (a, b) => a + b;
 
     return {
-        _getHits,
+        getHits,
         hit,
+        isSunk,
         testMethod,
     };
 };

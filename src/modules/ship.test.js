@@ -11,5 +11,22 @@ test("Confirm hits method to be working properly", () => {
 
     testShip2.hit();
 
-    expect(testShip2._getHits()).toBe(1);
+    expect(testShip2.getHits()).toBe(1);
+});
+
+test("Confirm isSunk registers sunken ships", () => {
+    const testShip2 = Ship(2, "Test Name");
+
+    testShip2.hit();
+    testShip2.hit();
+
+    expect(testShip2.isSunk()).toBe(true);
+});
+
+test("Confirm isSunk can return false", () => {
+    const testShip2 = Ship(2, "Test Name");
+
+    testShip2.hit();
+
+    expect(testShip2.isSunk()).toBe(false);
 });

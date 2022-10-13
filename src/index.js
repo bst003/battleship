@@ -1,7 +1,13 @@
 import "./assets/scss/styles.scss";
 
-import { ship } from "./modules/ship";
+import { Ship } from "./modules/ship";
 
 console.log("test log");
 
-console.log(ship.testMethod(1, 2));
+// const testShip = Ship(4, "Destroyer");
+
+// testShip.hit();
+
+// console.log(testShip._getHits());
+
+// console.log(testShip.testMethod(1, 2));

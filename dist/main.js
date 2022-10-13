@@ -116,7 +116,7 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _assets_scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./assets/scss/styles.scss */ \"./src/assets/scss/styles.scss\");\n/* harmony import */ var _modules_ship__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/ship */ \"./src/modules/ship.js\");\n\n\n\n\nconsole.log(\"test log\");\n\nconsole.log(_modules_ship__WEBPACK_IMPORTED_MODULE_1__.ship.testMethod(1, 2));\n\n\n//# sourceURL=webpack://battleship/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _assets_scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./assets/scss/styles.scss */ \"./src/assets/scss/styles.scss\");\n/* harmony import */ var _modules_ship__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/ship */ \"./src/modules/ship.js\");\n\n\n\n\nconsole.log(\"test log\");\n\n// const testShip = Ship(4, \"Destroyer\");\n\n// testShip.hit();\n\n// console.log(testShip._getHits());\n\n// console.log(testShip.testMethod(1, 2));\n\n\n//# sourceURL=webpack://battleship/./src/index.js?");
 
 /***/ }),
 
@@ -126,7 +126,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _ass
   \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"ship\": () => (/* binding */ ship)\n/* harmony export */ });\nconst ship = (() => {\n    const testMethod = (a, b) => a + b;\n\n    const factory = () => {};\n\n    return {\n        testMethod,\n    };\n})();\n\n\n//# sourceURL=webpack://battleship/./src/modules/ship.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Ship\": () => (/* binding */ Ship)\n/* harmony export */ });\nconst Ship = (shipLength, shipName) => {\n    let _hits = 0;\n    const _length = shipLength;\n    const _name = shipName;\n\n    const _getHits = () => _hits;\n\n    const hit = () => {\n        _hits++;\n    };\n\n    const testMethod = (a, b) => a + b;\n\n    return {\n        _getHits,\n        hit,\n        testMethod,\n    };\n};\n\n\n//# sourceURL=webpack://battleship/./src/modules/ship.js?");
 
 /***/ })
 

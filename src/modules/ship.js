@@ -3,10 +3,9 @@
 Need to add coordinates var (array) to Ship to store where the ship is placed
 
 */
-export const Ship = (shipLength, shipName) => {
+export const Ship = (shipLength) => {
     let _hits = 0;
     const _length = shipLength;
-    const _name = shipName;
 
     const getHits = () => _hits;
 

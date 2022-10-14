@@ -66,9 +66,16 @@ export const Gameboard = () => {
     };
 
     // startCoords take an array with an x and y value
-    const placeShip = (startCoords, orientation, length) => {
-        const ship = Ship(length);
-        _ships.push(ship);
+    const placeShip = (startPos, orientation, length) => {
+        const startPosX = startPos[0];
+        const startPosY = startPos[1];
+
+        if (_board[startPosX] !== undefined && _board[startPosY] !== undefined) {
+            const ship = Ship(length);
+            _ships.push(ship);
+        } else {
+            console.error("These coordinates do not exist");
+        }
     };
 
     const testMethod = (a, b) => a + b;

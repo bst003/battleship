@@ -13,3 +13,11 @@ test("Ship is added to _ships array", () => {
 
     expect(testBoard.getShips().length).toBe(1);
 });
+
+test("Ship is not added to _ships array", () => {
+    const testBoard = Gameboard();
+
+    testBoard.placeShip([-1, 0], "vert", 5);
+
+    expect(testBoard.getShips().length).toBe(0);
+});

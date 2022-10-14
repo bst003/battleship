@@ -1,3 +1,4 @@
+import { Ship } from "./ship";
 /*
 
 The board will be visible on the front end
@@ -16,6 +17,10 @@ placeShip will take in coordinates (Array) and orientation (vert or hori)
     Will have to pass coords to ship after placing
     TWO STEPS, FIRST CREATE SHIP AND THEN PLACE
 
+placeShips
+    add marks to _board
+    add ship to _ships
+
 */
 export const Gameboard = () => {
     const _board = [
@@ -33,11 +38,21 @@ export const Gameboard = () => {
 
     const _ships = [];
 
-    const placeShip = (coordArray, orientation, length) => {};
+    const getBoard = () => _board;
+
+    const getShips = () => _ships;
+
+    const placeShip = (coordArray, orientation, length) => {
+        const ship = Ship(length);
+        _ships.push(ship);
+    };
 
     const testMethod = (a, b) => a + b;
 
     return {
+        getBoard,
+        getShips,
+        placeShip,
         testMethod,
     };
 };

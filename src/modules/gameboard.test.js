@@ -5,3 +5,11 @@ test("adds 10 + 3 to equal 13", () => {
 
     expect(testBoard.testMethod(10, 3)).toBe(13);
 });
+
+test("Ship is added to _ships array", () => {
+    const testBoard = Gameboard();
+
+    testBoard.placeShip([0, 0], "vert", 5);
+
+    expect(testBoard.getShips().length).toBe(1);
+});

@@ -20,7 +20,7 @@ placeShip will take in coordinates (Array) and orientation (vert or hori)
 placeShips step by step
     if base coordinates are valid
         generate all coordinates
-            if all generated coordinates are valid
+            if all generated coordinates are valid (_verifyCoords)
                 create ship with length and all coordinates passed in
                 Add marks to _board where ship is
             if all generated coordinates are not valid
@@ -53,16 +53,32 @@ export const Gameboard = () => {
 
         finalCoords.push(startCoords);
 
-        for (i = 0; i < length; i++) {
+        for (let i = 0; i < length - 1; i++) {
+            let coord;
             if (orientation === "vert") {
-                const coord = [startCoords[0], startCoords[1] + (i + 1)];
+                coord = [startCoords[0], startCoords[1] + (i + 1)];
             } else {
-                const coord = [startCoords[0] + (i + 1), startCoords[1]];
+                coord = [startCoords[0] + (i + 1), startCoords[1]];
             }
             finalCoords.push(coord);
         }
 
         return finalCoords;
+    };
+
+    const _verifyCoords = (coordsArray) => {
+        let valid = true;
+
+        for (let i = 0; i < coordsArray.length; i++) {
+            const posX = coordsArray[i][0];
+            const posY = coordsArray[i][1];
+
+            if (_board[posX] === undefined || _board[posY] === undefined) {
+                valid = false;
+            }
+        }
+
+        return valid;
     };
 
     // startCoords take an array with an x and y value
@@ -71,10 +87,16 @@ export const Gameboard = () => {
         const startPosY = startPos[1];
 
         if (_board[startPosX] !== undefined && _board[startPosY] !== undefined) {
-            const ship = Ship(length);
-            _ships.push(ship);
+            const finalCoords = _generateAllCoordinates(startPos, orientation, length);
+
+            if (_verifyCoords(finalCoords)) {
+                const ship = Ship(length, finalCoords);
+                _ships.push(ship);
+            } else {
+                console.error("Some of the coordinates are not valid");
+            }
         } else {
-            console.error("These coordinates do not exist");
+            console.error("The initial coordinates do not exist");
         }
     };
 

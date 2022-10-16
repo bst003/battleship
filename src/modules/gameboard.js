@@ -29,6 +29,8 @@ placeShips step by step
     ***if base coordinates are not valid
         ***return error message
 
+IMPLEMENT PUBSUB WHERE POSSIBLE
+
 */
 export const Gameboard = () => {
     const _board = [

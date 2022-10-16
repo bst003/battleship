@@ -48,6 +48,16 @@ export const Gameboard = () => {
 
     const getShips = () => _ships;
 
+    const _addShipToBoard = (coordsArray) => {
+        for (let i = 0; i < coordsArray.length; i++) {
+            const posX = coordsArray[i][0];
+            const posY = coordsArray[i][1];
+
+            // posY needs to come first due to how array data is accessed
+            _board[posY][posX] = "s";
+        }
+    };
+
     const _generateAllCoordinates = (startCoords, orientation, length) => {
         const finalCoords = [];
 
@@ -92,6 +102,8 @@ export const Gameboard = () => {
             if (_verifyCoords(finalCoords)) {
                 const ship = Ship(length, finalCoords);
                 _ships.push(ship);
+
+                _addShipToBoard(ship.getCoords());
             } else {
                 console.error("Some of the coordinates are not valid");
             }

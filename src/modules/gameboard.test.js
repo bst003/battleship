@@ -69,3 +69,26 @@ test("Ship will try, and fail, to go from [9,0] to [13,0]", () => {
 
     expect(ships.length).toBe(0);
 });
+
+test("Add ship and update _board", () => {
+    const expectedBoard = [
+        ["s", "", "", "", "", "", "", "", "", ""],
+        ["s", "", "", "", "", "", "", "", "", ""],
+        ["s", "", "", "", "", "", "", "", "", ""],
+        ["s", "", "", "", "", "", "", "", "", ""],
+        ["s", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+    ];
+
+    const testBoard = Gameboard();
+
+    testBoard.placeShip([0, 0], "vert", 5);
+
+    const board = testBoard.getBoard();
+
+    expect(board).toEqual(expectedBoard);
+});

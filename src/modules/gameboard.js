@@ -18,14 +18,16 @@ placeShip will take in coordinates (Array) and orientation (vert or hori)
     TWO STEPS, FIRST CREATE SHIP AND THEN PLACE
 
 placeShips step by step
-    if base coordinates are valid
-        generate all coordinates
+    ***if base coordinates are valid
+        ***generate all coordinates
             if all generated coordinates are valid (_verifyCoords)
-                create ship with length and all coordinates passed in
-                Add marks to _board where ship is
-            if all generated coordinates are not valid
-    if base coordinates are not valid
-        return error message
+            AND NOT OCCUPIED BY OTHER SHIP!!!!
+                ***create ship with length and all coordinates passed in
+                ***Add marks to _board where ship is
+            ***if all generated coordinates are not valid
+                ***return error message
+    ***if base coordinates are not valid
+        ***return error message
 
 */
 export const Gameboard = () => {
@@ -54,6 +56,7 @@ export const Gameboard = () => {
             const posY = coordsArray[i][1];
 
             // posY needs to come first due to how array data is accessed
+            // y value comes first in the array
             _board[posY][posX] = "s";
         }
     };

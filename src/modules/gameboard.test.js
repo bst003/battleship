@@ -59,3 +59,13 @@ test("Ship will go from [0,0] to [4,0]", () => {
 
     expect(firstShip.getCoords()).toEqual(expectedCoords);
 });
+
+test("Ship will try, and fail, to go from [9,0] to [13,0]", () => {
+    const testBoard = Gameboard();
+
+    testBoard.placeShip([9, 0], "hori", 5);
+
+    const ships = testBoard.getShips();
+
+    expect(ships.length).toBe(0);
+});

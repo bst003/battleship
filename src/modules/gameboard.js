@@ -101,21 +101,43 @@ export const Gameboard = () => {
         const startPosX = startPos[0];
         const startPosY = startPos[1];
 
-        if (_board[startPosX] !== undefined && _board[startPosY] !== undefined) {
-            const finalCoords = _generateAllCoordinates(startPos, orientation, length);
-
-            if (_verifyCoords(finalCoords)) {
-                const ship = Ship(length, finalCoords);
-                _ships.push(ship);
-
-                _addShipToBoard(ship.getCoords());
-            } else {
-                console.error("Some of the coordinates are not valid");
-            }
-        } else {
+        if (_board[startPosX] === undefined && _board[startPosY] === undefined) {
             console.error("The initial coordinates do not exist");
+            return;
         }
+
+        const finalCoords = _generateAllCoordinates(startPos, orientation, length);
+
+        if (!_verifyCoords(finalCoords)) {
+            console.error("Some of the coordinates are not valid");
+            return;
+        }
+
+        const ship = Ship(length, finalCoords);
+        _ships.push(ship);
+
+        _addShipToBoard(ship.getCoords());
     };
+
+    // const placeShip = (startPos, orientation, length) => {
+    //     const startPosX = startPos[0];
+    //     const startPosY = startPos[1];
+
+    //     if (_board[startPosX] !== undefined && _board[startPosY] !== undefined) {
+    //         const finalCoords = _generateAllCoordinates(startPos, orientation, length);
+
+    //         if (_verifyCoords(finalCoords)) {
+    //             const ship = Ship(length, finalCoords);
+    //             _ships.push(ship);
+
+    //             _addShipToBoard(ship.getCoords());
+    //         } else {
+    //             console.error("Some of the coordinates are not valid");
+    //         }
+    //     } else {
+    //         console.error("The initial coordinates do not exist");
+    //     }
+    // };
 
     const testMethod = (a, b) => a + b;
 

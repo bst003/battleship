@@ -88,7 +88,11 @@ export const Gameboard = () => {
             const posX = coordsArray[i][0];
             const posY = coordsArray[i][1];
 
-            if (_board[posX] === undefined || _board[posY] === undefined) {
+            if (
+                _board[posX] === undefined ||
+                _board[posY] === undefined ||
+                _board[posY][posX] !== ""
+            ) {
                 valid = false;
             }
         }
@@ -101,10 +105,10 @@ export const Gameboard = () => {
         const startPosX = startPos[0];
         const startPosY = startPos[1];
 
-        if (_board[startPosX] === undefined && _board[startPosY] === undefined) {
-            console.error("The initial coordinates do not exist");
-            return;
-        }
+        // if (_board[startPosX] === undefined && _board[startPosY] === undefined) {
+        //     console.error("The initial coordinates do not exist");
+        //     return;
+        // }
 
         const finalCoords = _generateAllCoordinates(startPos, orientation, length);
 

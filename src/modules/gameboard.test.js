@@ -92,3 +92,53 @@ test("Add ship and update _board", () => {
 
     expect(board).toEqual(expectedBoard);
 });
+
+test("Ensure two ships cannot occupy the same spot", () => {
+    const expectedBoard = [
+        ["", "", "s", "", "", "", "", "", "", ""],
+        ["", "", "s", "", "", "", "", "", "", ""],
+        ["", "", "s", "", "", "", "", "", "", ""],
+        ["", "", "s", "", "", "", "", "", "", ""],
+        ["", "", "s", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+    ];
+
+    const testBoard = Gameboard();
+
+    testBoard.placeShip([2, 0], "vert", 5);
+
+    testBoard.placeShip([0, 4], "hori", 4);
+
+    const board = testBoard.getBoard();
+
+    expect(board).toEqual(expectedBoard);
+});
+
+test("Test that multiple ships can be placed", () => {
+    const expectedBoard = [
+        ["", "", "s", "", "", "", "", "", "", ""],
+        ["", "", "s", "", "", "", "", "", "", ""],
+        ["", "", "s", "", "", "", "", "", "", ""],
+        ["", "", "s", "", "", "", "", "", "", ""],
+        ["", "", "s", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["s", "s", "s", "s", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+    ];
+
+    const testBoard = Gameboard();
+
+    testBoard.placeShip([2, 0], "vert", 5);
+
+    testBoard.placeShip([0, 6], "hori", 4);
+
+    const board = testBoard.getBoard();
+
+    expect(board).toEqual(expectedBoard);
+});

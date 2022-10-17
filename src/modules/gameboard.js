@@ -31,6 +31,15 @@ placeShips step by step
 
 IMPLEMENT PUBSUB WHERE POSSIBLE
 
+receiveAttack step by step
+    if base coords are valid
+        if spot is empty then change spot to x
+            record misses
+        if spot is ship then change to h
+            Add hit to ship in question
+    if base coordinates are not valid
+        return error message
+
 */
 export const Gameboard = () => {
     const _board = [
@@ -102,14 +111,6 @@ export const Gameboard = () => {
 
     // startCoords take an array with an x and y value
     const placeShip = (startPos, orientation, length) => {
-        const startPosX = startPos[0];
-        const startPosY = startPos[1];
-
-        // if (_board[startPosX] === undefined && _board[startPosY] === undefined) {
-        //     console.error("The initial coordinates do not exist");
-        //     return;
-        // }
-
         const finalCoords = _generateAllCoordinates(startPos, orientation, length);
 
         if (!_verifyCoords(finalCoords)) {
@@ -123,25 +124,32 @@ export const Gameboard = () => {
         _addShipToBoard(ship.getCoords());
     };
 
-    // const placeShip = (startPos, orientation, length) => {
-    //     const startPosX = startPos[0];
-    //     const startPosY = startPos[1];
+    const _determineBoardMark = (coords) => {
+        const posX = coords[0];
+        const posY = coords[1];
 
-    //     if (_board[startPosX] !== undefined && _board[startPosY] !== undefined) {
-    //         const finalCoords = _generateAllCoordinates(startPos, orientation, length);
+        if (_board[posY][posX] === "" || _board[posY][posX] === "x") {
+            return "x";
+        }
+        return "h";
+    };
 
-    //         if (_verifyCoords(finalCoords)) {
-    //             const ship = Ship(length, finalCoords);
-    //             _ships.push(ship);
+    const _determineMissedAttack = (prevMark, currentMark) => {};
 
-    //             _addShipToBoard(ship.getCoords());
-    //         } else {
-    //             console.error("Some of the coordinates are not valid");
-    //         }
-    //     } else {
-    //         console.error("The initial coordinates do not exist");
-    //     }
-    // };
+    const receiveAttack = (coords) => {
+        if (!_verifyCoords([coords])) {
+            console.error("The attack coordinates are not valid");
+        }
+
+        const posX = coords[0];
+        const posY = coords[1];
+
+        const prevMark = _board[posY][posX];
+
+        _board[posY][posX] = _determineBoardMark(coords);
+
+        _determineMissedAttack(prevMark, _board[posY][posX]);
+    };
 
     const testMethod = (a, b) => a + b;
 
@@ -149,6 +157,7 @@ export const Gameboard = () => {
         getBoard,
         getShips,
         placeShip,
+        receiveAttack,
         testMethod,
     };
 };

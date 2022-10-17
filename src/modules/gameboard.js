@@ -149,6 +149,7 @@ export const Gameboard = () => {
         _board[posY][posX] = _determineBoardMark(coords);
 
         _determineMissedAttack(prevMark, _board[posY][posX]);
+        // Still have to determine if ship is hit and if all ships are sunken
     };
 
     const testMethod = (a, b) => a + b;

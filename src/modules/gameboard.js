@@ -194,8 +194,9 @@ export const Gameboard = () => {
         }
 
         const hitShip = _getHitShip(coords);
+        hitShip.hit();
 
-        // Still have to determine if ship is hit and if all ships are sunken
+        // Still have to determine if all ships are sunken
     };
 
     const testMethod = (a, b) => a + b;

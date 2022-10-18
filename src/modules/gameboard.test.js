@@ -142,3 +142,15 @@ test("Test that multiple ships can be placed", () => {
 
     expect(board).toEqual(expectedBoard);
 });
+
+test("Missed attacks are recorded properly", () => {
+    const testBoard = Gameboard();
+
+    testBoard.placeShip([2, 0], "vert", 5);
+
+    testBoard.placeShip([0, 6], "hori", 4);
+
+    testBoard.receiveAttack([8, 8]);
+
+    expect(testBoard.getMissedAttacks()).toBe(Number(1));
+});

@@ -55,9 +55,13 @@ export const Gameboard = () => {
         ["", "", "", "", "", "", "", "", "", ""],
     ];
 
+    let _missedAttacks = 0;
+
     const _ships = [];
 
     const getBoard = () => _board;
+
+    const getMissedAttacks = () => _missedAttacks;
 
     const getShips = () => _ships;
 
@@ -134,11 +138,20 @@ export const Gameboard = () => {
         return "h";
     };
 
-    const _determineMissedAttack = (prevMark, currentMark) => {};
+    // Returns true if attack has missed
+    const _determineMissedAttack = (prevMark, currentMark) => {
+        if (prevMark === "s" && currentMark === "h") {
+            return false;
+        }
+        return true;
+    };
+
+    const _getHitShip = (coords) => {};
 
     const receiveAttack = (coords) => {
         if (!_verifyCoords([coords])) {
             console.error("The attack coordinates are not valid");
+            return;
         }
 
         const posX = coords[0];
@@ -149,7 +162,13 @@ export const Gameboard = () => {
         const currentMark = _determineBoardMark(coords);
         _board[posY][posX] = currentMark;
 
-        _determineMissedAttack(prevMark, currentMark);
+        if (_determineMissedAttack(prevMark, currentMark)) {
+            _missedAttacks++;
+            return;
+        }
+
+        const hitShip = _getHitShip(coords);
+
         // Still have to determine if ship is hit and if all ships are sunken
     };
 
@@ -157,6 +176,7 @@ export const Gameboard = () => {
 
     return {
         getBoard,
+        getMissedAttacks,
         getShips,
         placeShip,
         receiveAttack,

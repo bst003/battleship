@@ -154,3 +154,7 @@ test("Missed attacks are recorded properly", () => {
 
     expect(testBoard.getMissedAttacks()).toBe(Number(1));
 });
+
+/*
+TEST THAT SHIPS ARE ADDING HITS THROUGH RECEIVE ATTACK
+*/

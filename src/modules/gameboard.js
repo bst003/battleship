@@ -199,14 +199,11 @@ export const Gameboard = () => {
         // Still have to determine if all ships are sunken
     };
 
-    const testMethod = (a, b) => a + b;
-
     return {
         getBoard,
         getMissedAttacks,
         getShips,
         placeShip,
         receiveAttack,
-        testMethod,
     };
 };

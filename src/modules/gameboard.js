@@ -138,15 +138,41 @@ export const Gameboard = () => {
         return "h";
     };
 
-    // Returns true if attack has missed
-    const _determineMissedAttack = (prevMark, currentMark) => {
+    const _getHitShip = (coords) => {
+        let hitShip;
+
+        const ships = getShips();
+
+        const posX = coords[0];
+        const posY = coords[1];
+
+        for (let i = 0; i < ships.length; i++) {
+            const shipCoords = ships[i].getCoords();
+
+            if (hitShip !== undefined) {
+                break;
+            }
+
+            for (let z = 0; z < shipCoords.length; z++) {
+                const currentPosX = shipCoords[z][0];
+                const currentPosY = shipCoords[z][1];
+
+                if (posX === currentPosX && posY === currentPosY) {
+                    hitShip = ships[i];
+                    break;
+                }
+            }
+        }
+
+        return hitShip;
+    };
+
+    const _missedAttack = (prevMark, currentMark) => {
         if (prevMark === "s" && currentMark === "h") {
             return false;
         }
         return true;
     };
-
-    const _getHitShip = (coords) => {};
 
     const receiveAttack = (coords) => {
         if (!_verifyCoords([coords])) {
@@ -162,7 +188,7 @@ export const Gameboard = () => {
         const currentMark = _determineBoardMark(coords);
         _board[posY][posX] = currentMark;
 
-        if (_determineMissedAttack(prevMark, currentMark)) {
+        if (_missedAttack(prevMark, currentMark)) {
             _missedAttacks++;
             return;
         }

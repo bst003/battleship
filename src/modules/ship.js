@@ -23,13 +23,10 @@ export const Ship = (shipLength, coords) => {
         return false;
     };
 
-    const testMethod = (a, b) => a + b;
-
     return {
         getCoords,
         getHits,
         hit,
         isSunk,
-        testMethod,
     };
 };

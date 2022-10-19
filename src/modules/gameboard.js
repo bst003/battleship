@@ -94,7 +94,7 @@ export const Gameboard = () => {
         return finalCoords;
     };
 
-    const _verifyCoords = (coordsArray) => {
+    const _validPlaceCoords = (coordsArray) => {
         let valid = true;
 
         for (let i = 0; i < coordsArray.length; i++) {
@@ -117,7 +117,7 @@ export const Gameboard = () => {
     const placeShip = (startPos, orientation, length) => {
         const finalCoords = _generateAllCoordinates(startPos, orientation, length);
 
-        if (!_verifyCoords(finalCoords)) {
+        if (!_validPlaceCoords(finalCoords)) {
             console.error("Some of the coordinates are not valid");
             return;
         }
@@ -174,8 +174,26 @@ export const Gameboard = () => {
         return true;
     };
 
+    const _validAttackCoords = (coordsArray) => {
+        let valid = true;
+
+        const posX = coordsArray[0];
+        const posY = coordsArray[1];
+
+        if (
+            _board[posX] === undefined ||
+            _board[posY] === undefined ||
+            _board[posY][posX] === "x" ||
+            _board[posY][posX] === "h"
+        ) {
+            valid = false;
+        }
+
+        return valid;
+    };
+
     const receiveAttack = (coords) => {
-        if (!_verifyCoords([coords])) {
+        if (!_validAttackCoords(coords)) {
             console.error("The attack coordinates are not valid");
             return;
         }

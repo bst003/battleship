@@ -167,6 +167,23 @@ test("Ensure ships are registering hits properly", () => {
     expect(attackedShip.getHits()).toBe(Number(2));
 });
 
+test("Test for game over", () => {
+    const testBoard = Gameboard();
+
+    testBoard.placeShip([2, 0], "vert", 2);
+
+    testBoard.placeShip([0, 6], "hori", 2);
+
+    testBoard.receiveAttack([2, 0]);
+    testBoard.receiveAttack([2, 1]);
+    testBoard.receiveAttack([0, 6]);
+    testBoard.receiveAttack([1, 6]);
+
+    const gameOver = testBoard.checkForGameOver();
+
+    expect(gameOver).toBe(true);
+});
+
 /*
 TEST THAT SHIPS ARE ADDING HITS THROUGH RECEIVE ATTACK
 */

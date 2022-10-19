@@ -65,6 +65,21 @@ export const Gameboard = () => {
 
     const getShips = () => _ships;
 
+    // Check if all ships are sunken
+    const checkForGameOver = () => {
+        const ships = getShips();
+
+        for (let i = 0; i < ships.length; i++) {
+            const shipSunk = ships[i].isSunk();
+
+            if (!shipSunk) {
+                return false;
+            }
+        }
+
+        return true;
+    };
+
     const _addShipToBoard = (coordsArray) => {
         for (let i = 0; i < coordsArray.length; i++) {
             const posX = coordsArray[i][0];
@@ -167,20 +182,16 @@ export const Gameboard = () => {
         return hitShip;
     };
 
+    const _addHitToShip = (coords) => {
+        const hitShip = _getHitShip(coords);
+        hitShip.hit();
+    };
+
     const _missedAttack = (prevMark, currentMark) => {
         if (prevMark === "s" && currentMark === "h") {
             return false;
         }
         return true;
-    };
-
-    // Check if all ships are sunken
-    const _returnShipsSunkenStatus = () => {
-        let result = true;
-
-        const ships = getShips();
-
-        return result;
     };
 
     const _validAttackCoords = (coordsArray) => {
@@ -220,17 +231,15 @@ export const Gameboard = () => {
             return;
         }
 
-        const hitShip = _getHitShip(coords);
-        hitShip.hit();
-
-        // Still have to determine if all ships are sunken
-        const allShipsSunken = _returnShipsSunkenStatus();
+        _addHitToShip(coords);
+        // _checkForGameOver();
     };
 
     return {
         getBoard,
         getMissedAttacks,
         getShips,
+        checkForGameOver,
         placeShip,
         receiveAttack,
     };

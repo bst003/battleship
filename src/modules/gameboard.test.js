@@ -154,7 +154,7 @@ test("Ensure ships are registering hits properly", () => {
 
     testBoard.placeShip([2, 0], "vert", 5);
 
-    testBoard.placeShip([0, 6], "hori", 4);
+    testBoard.placeShip([0, 6], "hori", 2);
 
     testBoard.receiveAttack([2, 0]);
 

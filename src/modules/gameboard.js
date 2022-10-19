@@ -174,6 +174,15 @@ export const Gameboard = () => {
         return true;
     };
 
+    // Check if all ships are sunken
+    const _returnShipsSunkenStatus = () => {
+        let result = true;
+
+        const ships = getShips();
+
+        return result;
+    };
+
     const _validAttackCoords = (coordsArray) => {
         let valid = true;
 
@@ -215,6 +224,7 @@ export const Gameboard = () => {
         hitShip.hit();
 
         // Still have to determine if all ships are sunken
+        const allShipsSunken = _returnShipsSunkenStatus();
     };
 
     return {

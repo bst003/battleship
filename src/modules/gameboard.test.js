@@ -183,7 +183,3 @@ test("Test for game over", () => {
 
     expect(gameOver).toBe(true);
 });
-
-/*
-TEST THAT SHIPS ARE ADDING HITS THROUGH RECEIVE ATTACK
-*/

@@ -66,7 +66,7 @@ export const Gameboard = () => {
     const getShips = () => _ships;
 
     // Check if all ships are sunken
-    const checkForGameOver = () => {
+    const allShipsSunk = () => {
         const ships = getShips();
 
         for (let i = 0; i < ships.length; i++) {
@@ -239,7 +239,7 @@ export const Gameboard = () => {
         getBoard,
         getMissedAttacks,
         getShips,
-        checkForGameOver,
+        allShipsSunk,
         placeShip,
         receiveAttack,
     };

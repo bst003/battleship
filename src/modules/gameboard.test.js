@@ -179,7 +179,7 @@ test("Test for game over", () => {
     testBoard.receiveAttack([0, 6]);
     testBoard.receiveAttack([1, 6]);
 
-    const gameOver = testBoard.checkForGameOver();
+    const allShipsSunk = testBoard.allShipsSunk();
 
-    expect(gameOver).toBe(true);
+    expect(allShipsSunk).toBe(true);
 });

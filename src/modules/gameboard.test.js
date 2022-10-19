@@ -155,6 +155,24 @@ test("Missed attacks are recorded properly", () => {
     expect(testBoard.getMissedAttacks()).toBe(Number(1));
 });
 
+test("Ensure ships are registering hits properly", () => {
+    const testBoard = Gameboard();
+
+    testBoard.placeShip([2, 0], "vert", 5);
+
+    testBoard.placeShip([0, 6], "hori", 4);
+
+    testBoard.receiveAttack([2, 0]);
+
+    testBoard.receiveAttack([2, 1]);
+
+    const ships = testBoard.getShips();
+
+    const attackedShip = ships[0];
+
+    expect(attackedShip.getHits()).toBe(Number(2));
+});
+
 /*
 TEST THAT SHIPS ARE ADDING HITS THROUGH RECEIVE ATTACK
 */

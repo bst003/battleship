@@ -1,6 +1,16 @@
 import { Gameboard } from "./gameboard";
 /*
 
+TWO MAIN IDEAS
+    1. Assigning board to a player and having it
+       be an object property of the player while
+       the players are stored in the Game Loop
+
+    2. Have the Game Loop have an array to hold Players
+       and another array to hold Boards. Each Player would have
+       an ID that corresponds to a board. This option seems easier
+       for pubsub
+
 Need to assign a board to the player
 
 How do I communicate that one player attacked another?
@@ -20,6 +30,11 @@ Set player mode for computer?
     mode = computer for bots
 
 How do I switch between players after attack?
+    May have to wait until Gameloop is made to do that
+    Gameloop holds array of players?
+
+WHAT IS GAME LOOP HELD BOTH PLAYERS AND GAME BOARDS?
+    Assign an ID to each player that corresponds to a game board with the same ID
 
 */
 export const Player = () => {

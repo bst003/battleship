@@ -36,9 +36,17 @@ How do I switch between players after attack?
 WHAT IF GAME LOOP HELD BOTH PLAYERS AND GAME BOARDS?
     Assign an ID to each player that corresponds to a game board with the same ID
 
+HOW DO I ACCESS OTHER PLAYER?
+
 */
-export const Player = () => {
-    const playerBoard = Gameboard();
+export const Player = (id, botMode = false) => {
+    const _isPlayerBot = botMode;
+
+    const _playerBoard = Gameboard();
+
+    const _playerID = id;
+
+    const getplayerID = () => _playerID;
 
     const _genRandomCoordinates = () => {
         const x = Math.floor(Math.random() * 10);
@@ -50,6 +58,7 @@ export const Player = () => {
     const testMethod = (a, b) => a + b;
 
     return {
+        getplayerID,
         testMethod,
     };
 };

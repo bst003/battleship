@@ -40,6 +40,13 @@ WHAT IS GAME LOOP HELD BOTH PLAYERS AND GAME BOARDS?
 export const Player = () => {
     const playerBoard = Gameboard();
 
+    const _genRandomCoordinates = () => {
+        const x = Math.floor(Math.random() * 10);
+        const y = Math.floor(Math.random() * 10);
+
+        return [x, y];
+    };
+
     const testMethod = (a, b) => a + b;
 
     return {

@@ -33,7 +33,7 @@ How do I switch between players after attack?
     May have to wait until Gameloop is made to do that
     Gameloop holds array of players?
 
-WHAT IS GAME LOOP HELD BOTH PLAYERS AND GAME BOARDS?
+WHAT IF GAME LOOP HELD BOTH PLAYERS AND GAME BOARDS?
     Assign an ID to each player that corresponds to a game board with the same ID
 
 */

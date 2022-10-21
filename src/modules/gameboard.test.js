@@ -167,6 +167,31 @@ test("Ensure ships are registering hits properly", () => {
     expect(attackedShip.getHits()).toBe(Number(2));
 });
 
+test("Ensure board is properly marking misses", () => {
+    const expectedBoard = [
+        ["", "", "s", "", "", "", "", "", "", ""],
+        ["", "", "s", "", "", "", "", "", "", ""],
+        ["", "", "s", "", "", "", "", "", "", ""],
+        ["", "", "s", "", "", "", "", "", "", ""],
+        ["", "", "s", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "x", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+    ];
+
+    const testBoard = Gameboard();
+
+    testBoard.placeShip([2, 0], "vert", 5);
+
+    testBoard.receiveAttack([6, 6]);
+
+    const boardArray = testBoard.getBoard();
+
+    expect(boardArray).toEqual(expectedBoard);
+});
+
 test("Test for game over", () => {
     const testBoard = Gameboard();
 

@@ -24,7 +24,7 @@ How do I switch between players after attack?
 HOW DO I ACCESS OTHER PLAYER?
 
 */
-export const Player = (id, getPlayersFunc, botMode = false) => {
+export const Player = (id, getPlayersFunc = () => null, botMode = false) => {
     const _isPlayerBot = botMode;
 
     const _playerBoard = Gameboard();
@@ -43,6 +43,8 @@ export const Player = (id, getPlayersFunc, botMode = false) => {
 
         return [x, y];
     };
+
+    const attack = (playerObject) => {};
 
     const testMethod = (a, b) => a + b;
 

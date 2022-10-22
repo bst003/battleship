@@ -31,7 +31,9 @@ export const Player = (id, botMode = false) => {
 
     const _playerID = id;
 
-    const getplayerID = () => _playerID;
+    const getPlayerBoard = () => _playerBoard;
+
+    const getPlayerID = () => _playerID;
 
     const _genRandomCoordinates = () => {
         const x = Math.floor(Math.random() * 10);
@@ -43,7 +45,8 @@ export const Player = (id, botMode = false) => {
     const testMethod = (a, b) => a + b;
 
     return {
-        getplayerID,
+        getPlayerBoard,
+        getPlayerID,
         testMethod,
     };
 };

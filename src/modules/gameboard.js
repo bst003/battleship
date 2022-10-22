@@ -133,7 +133,7 @@ export const Gameboard = () => {
         const finalCoords = _generateAllCoordinates(startPos, orientation, length);
 
         if (!_validPlaceCoords(finalCoords)) {
-            console.error("Some of the coordinates are not valid");
+            // console.error("Some of the coordinates are not valid");
             return;
         }
 

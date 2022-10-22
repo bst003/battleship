@@ -19,7 +19,7 @@ test.only("Individual Players can access other players", () => {
 
     const player1 = game.getPlayers()[0];
 
-    console.log(player1.getAllPlayers);
+    console.log(player1.getAllPlayers());
 
     expect(player1.testMethod(1, 3)).toBe(4);
 });

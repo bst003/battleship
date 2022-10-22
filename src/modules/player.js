@@ -1,18 +1,9 @@
 import { Gameboard } from "./gameboard";
 /*
 
-How do I communicate that one player attacked another?
-    From the player level that is, receiveAttack handles it on a board level
-    Something with communicating via the ID (array position)
-
-Need to have method to calculate random and VALID moves
-    1. Have a method that takes in coordinates
-    2. pubsub to get those coordinates to board
-        - How do I target specific board with pubsub?
-        - Refactor _validAttackCoords to take in {data} argument
-          and if has certain attribute resend info back?
-    3. If value send back is not valid then run it again.
-    4. If attribute is valid then pubsub receiveAttack to that board
+***How do I communicate that one player attacked another?
+    ***From the player level that is, receiveAttack handles it on a board level
+    ***Something with communicating via the ID (array position)
 
 ***Set player mode for computer?
     ***Have boolean to indicate if player is bot or not
@@ -21,8 +12,19 @@ How do I switch between players after attack?
     May have to wait until Gameloop is made to do that
     Gameloop holds array of players?
 
-HOW DO I ACCESS OTHER PLAYER?
+Steps on Attack
+    If cooordinates are NOT valid
+        return
 
+    Initiate receiveAttack on board
+
+    Check if game over has occurred
+
+    Toggle active status on player1 (ADD THIS PROPERTY TO PLAYEr)
+    Toggle active status on player2
+
+    If active player is bot then gen random coordinates and attack with those.
+        Make special function to run computer move
 */
 export const Player = (id, getPlayersFunc = () => null, botMode = false) => {
     const _isPlayerBot = botMode;

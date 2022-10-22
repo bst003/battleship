@@ -44,11 +44,16 @@ export const Player = (id, getPlayersFunc = () => null, botMode = false) => {
         return [x, y];
     };
 
-    const attack = (playerObject) => {};
+    const attack = (playerObject, coords) => {
+        const board = playerObject.getPlayerBoard();
+
+        board.receiveAttack(coords);
+    };
 
     const testMethod = (a, b) => a + b;
 
     return {
+        attack,
         getAllPlayers,
         getPlayerBoard,
         getPlayerID,

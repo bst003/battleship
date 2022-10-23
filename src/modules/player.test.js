@@ -76,3 +76,15 @@ test("Confirm attacking player status is toggle after attack", () => {
 
     expect(player1.getPlayerActiveStatus()).toBe(false);
 });
+
+test("Confirm attacked player status is toggle after attack", () => {
+    const player1 = Player(0, true);
+    const player2 = Player(1);
+
+    const player2Board = player2.getPlayerBoard();
+    player2Board.placeShip([0, 0], "hori", 2);
+
+    player1.attack(player2, [0, 0]);
+
+    expect(player2.getPlayerActiveStatus()).toBe(true);
+});

@@ -18,10 +18,10 @@ Steps on Attack
 
     ***Initiate receiveAttack on board
 
-    Check if game over has occurred
+    ***Check if game over has occurred
 
-    Toggle active status on player1 (ADD THIS PROPERTY TO PLAYER)
-    Toggle active status on player2
+    ***Toggle active status on player1 (ADD THIS PROPERTY TO PLAYER)
+    ***Toggle active status on player2
 
     If active player is bot then gen random coordinates and attack with those.
         Make special function to run computer move

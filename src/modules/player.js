@@ -26,7 +26,9 @@ Steps on Attack
     If active player is bot then gen random coordinates and attack with those.
         Make special function to run computer move
 */
-export const Player = (id, getPlayersFunc = () => null, botMode = false) => {
+export const Player = (id, activePlayer, getPlayersFunc = () => null, botMode = false) => {
+    let _isActivePlayer = activePlayer;
+
     const _isPlayerBot = botMode;
 
     const _playerBoard = Gameboard();
@@ -40,6 +42,10 @@ export const Player = (id, getPlayersFunc = () => null, botMode = false) => {
     const getPlayerBotStatus = () => _isPlayerBot;
 
     const getPlayerID = () => _playerID;
+
+    const _toggleActiveStatus = () => {
+        _isActivePlayer = _isActivePlayer !== true;
+    };
 
     const _genRandomCoordinates = () => {
         const x = Math.floor(Math.random() * 10);
@@ -62,6 +68,9 @@ export const Player = (id, getPlayersFunc = () => null, botMode = false) => {
             console.log("all ships are sunken, game over");
             return;
         }
+
+        this._toggleActiveStatus();
+        playerObject._toggleActiveStatus();
     };
 
     const testMethod = (a, b) => a + b;

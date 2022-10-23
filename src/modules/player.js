@@ -56,12 +56,12 @@ export const Player = (id, getPlayersFunc = () => null, botMode = false) => {
             return;
         }
 
+        board.receiveAttack(coords);
+
         if (board.allShipsSunk()) {
             console.log("all ships are sunken, game over");
             return;
         }
-
-        board.receiveAttack(coords);
     };
 
     const testMethod = (a, b) => a + b;

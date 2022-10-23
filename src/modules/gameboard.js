@@ -224,6 +224,7 @@ export const Gameboard = () => {
         const prevMark = _board[posY][posX];
 
         const currentMark = _determineBoardMark(coords);
+        console.log(currentMark);
         _board[posY][posX] = currentMark;
 
         if (_missedAttack(prevMark, currentMark)) {

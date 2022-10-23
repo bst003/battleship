@@ -13,14 +13,14 @@ How do I switch between players after attack?
     Gameloop holds array of players?
 
 Steps on Attack
-    If cooordinates are NOT valid
-        return
+    ***If cooordinates are NOT valid
+        ***return
 
-    Initiate receiveAttack on board
+    ***Initiate receiveAttack on board
 
     Check if game over has occurred
 
-    Toggle active status on player1 (ADD THIS PROPERTY TO PLAYEr)
+    Toggle active status on player1 (ADD THIS PROPERTY TO PLAYER)
     Toggle active status on player2
 
     If active player is bot then gen random coordinates and attack with those.
@@ -37,6 +37,8 @@ export const Player = (id, getPlayersFunc = () => null, botMode = false) => {
 
     const getPlayerBoard = () => _playerBoard;
 
+    const getPlayerBotStatus = () => _isPlayerBot;
+
     const getPlayerID = () => _playerID;
 
     const _genRandomCoordinates = () => {
@@ -48,6 +50,16 @@ export const Player = (id, getPlayersFunc = () => null, botMode = false) => {
 
     const attack = (playerObject, coords) => {
         const board = playerObject.getPlayerBoard();
+
+        if (!board.validAttackCoords(coords)) {
+            console.error("The attack coordinates are not valid");
+            return;
+        }
+
+        if (board.allShipsSunk()) {
+            console.log("all ships are sunken, game over");
+            return;
+        }
 
         board.receiveAttack(coords);
     };

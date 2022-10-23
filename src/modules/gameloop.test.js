@@ -1,12 +1,6 @@
 import { Gameloop } from "./gameloop";
 
-test("Ship is added to _ships array", () => {
-    const game = Gameloop();
-
-    expect(game.testMethod(1, 3)).toBe(4);
-});
-
-test.only("Individual Players can access other players", () => {
+test("Individual Players can access other players", () => {
     const game = Gameloop();
 
     // add players

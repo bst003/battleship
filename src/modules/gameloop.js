@@ -19,11 +19,8 @@ export const Gameloop = () => {
         _players.push(player);
     };
 
-    const testMethod = (a, b) => a + b;
-
     return {
         addPlayer,
         getPlayers,
-        testMethod,
     };
 };

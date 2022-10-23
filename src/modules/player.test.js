@@ -1,12 +1,6 @@
 import { Player } from "./player";
 
-test("Test Method", () => {
-    const player = Player();
-
-    expect(player.testMethod(1, 3)).toBe(4);
-});
-
-test.only("Players can attack other players boards", () => {
+test("Players can attack other players boards", () => {
     const expectedBoard = [
         ["x", "", "", "", "", "", "", "", "", ""],
         ["", "", "", "", "", "", "", "", "", ""],
@@ -50,7 +44,7 @@ test("Players attacks with invalid coords will be stopped", () => {
     expect(player2.getPlayerBoard().getBoard()).toEqual(expectedBoard);
 });
 
-test("Confirm all ships sunk runs properly", () => {
+test("Confirm all ships sunk runs properly on attack", () => {
     const player1 = Player(0);
     const player2 = Player(1);
 
@@ -60,5 +54,25 @@ test("Confirm all ships sunk runs properly", () => {
     player1.attack(player2, [0, 0]);
     player1.attack(player2, [1, 0]);
 
+    console.log(player2Board.getBoard());
+
     expect(player2Board.allShipsSunk()).toBe(true);
+});
+
+test("Confirm player status after being created", () => {
+    const player1 = Player(0, true);
+
+    expect(player1.getPlayerActiveStatus()).toBe(true);
+});
+
+test("Confirm attacking player status is toggle after attack", () => {
+    const player1 = Player(0, true);
+    const player2 = Player(1);
+
+    const player2Board = player2.getPlayerBoard();
+    player2Board.placeShip([0, 0], "hori", 2);
+
+    player1.attack(player2, [0, 0]);
+
+    expect(player1.getPlayerActiveStatus()).toBe(false);
 });

@@ -26,7 +26,7 @@ Steps on Attack
     If active player is bot then gen random coordinates and attack with those.
         Make special function to run computer move
 */
-export const Player = (id, activePlayer, getPlayersFunc = () => null, botMode = false) => {
+export const Player = (id, activePlayer = false, getPlayersFunc = () => null, botMode = false) => {
     let _isActivePlayer = activePlayer;
 
     const _isPlayerBot = botMode;
@@ -39,11 +39,13 @@ export const Player = (id, activePlayer, getPlayersFunc = () => null, botMode = 
 
     const getPlayerBoard = () => _playerBoard;
 
-    const getPlayerBotStatus = () => _isPlayerBot;
+    const getPlayerActiveStatus = () => _isActivePlayer;
+
+    const _getPlayerBotStatus = () => _isPlayerBot;
 
     const getPlayerID = () => _playerID;
 
-    const _toggleActiveStatus = () => {
+    const toggleActiveStatus = () => {
         _isActivePlayer = _isActivePlayer !== true;
     };
 
@@ -69,17 +71,16 @@ export const Player = (id, activePlayer, getPlayersFunc = () => null, botMode = 
             return;
         }
 
-        this._toggleActiveStatus();
-        playerObject._toggleActiveStatus();
+        toggleActiveStatus();
+        playerObject.toggleActiveStatus();
     };
-
-    const testMethod = (a, b) => a + b;
 
     return {
         attack,
         getAllPlayers,
+        getPlayerActiveStatus,
         getPlayerBoard,
         getPlayerID,
-        testMethod,
+        toggleActiveStatus,
     };
 };

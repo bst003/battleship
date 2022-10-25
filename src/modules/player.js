@@ -25,6 +25,7 @@ Steps on Attack
 
     If active player is bot then gen random coordinates and attack with those.
         Make special function to run computer move
+        Confirm compter move is valid
 */
 export const Player = (id, activePlayer = false, getPlayersFunc = () => null, botMode = false) => {
     let _isActivePlayer = activePlayer;
@@ -80,6 +81,8 @@ export const Player = (id, activePlayer = false, getPlayersFunc = () => null, bo
             const player1 = players[0];
 
             const attackCoords = _genRandomCoordinates();
+
+            // Create recurive method to gen/check attack coords, if invalid gen new coords
 
             playerObject.attack(player1, attackCoords);
         }

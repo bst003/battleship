@@ -129,6 +129,7 @@ export const Gameboard = () => {
     };
 
     // startCoords take an array with an x and y value
+    // values for orientation are 'vert' or 'hori'
     const placeShip = (startPos, orientation, length) => {
         const finalCoords = _generateAllCoordinates(startPos, orientation, length);
 

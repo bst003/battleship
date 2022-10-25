@@ -41,7 +41,7 @@ export const Player = (id, activePlayer = false, getPlayersFunc = () => null, bo
 
     const getPlayerActiveStatus = () => _isActivePlayer;
 
-    const _getPlayerBotStatus = () => _isPlayerBot;
+    const getPlayerBotStatus = () => _isPlayerBot;
 
     const getPlayerID = () => _playerID;
 
@@ -73,12 +73,23 @@ export const Player = (id, activePlayer = false, getPlayersFunc = () => null, bo
 
         toggleActiveStatus();
         playerObject.toggleActiveStatus();
+
+        // If playerObject is active and a bot
+        if (playerObject.getPlayerActiveStatus() && playerObject.getPlayerBotStatus()) {
+            const players = getAllPlayers();
+            const player1 = players[0];
+
+            const attackCoords = _genRandomCoordinates();
+
+            playerObject.attack(player1, attackCoords);
+        }
     };
 
     return {
         attack,
         getAllPlayers,
         getPlayerActiveStatus,
+        getPlayerBotStatus,
         getPlayerBoard,
         getPlayerID,
         toggleActiveStatus,

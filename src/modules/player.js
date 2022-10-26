@@ -57,6 +57,18 @@ export const Player = (id, activePlayer = false, getPlayersFunc = () => null, bo
         return [x, y];
     };
 
+    const _genComputerAttackCoords = (playerObject) => {
+        const randomCoords = _genRandomCoordinates();
+
+        const playerBoard = playerObject.getPlayerBoard();
+
+        if (!playerBoard.validAttackCoords(randomCoords)) {
+            return _genComputerAttackCoords(playerObject);
+        }
+
+        return randomCoords;
+    };
+
     const attack = (playerObject, coords) => {
         const board = playerObject.getPlayerBoard();
 
@@ -80,7 +92,7 @@ export const Player = (id, activePlayer = false, getPlayersFunc = () => null, bo
             const players = getAllPlayers();
             const player1 = players[0];
 
-            const attackCoords = _genRandomCoordinates();
+            const attackCoords = _genComputerAttackCoords(player1);
 
             // Create recurive method to gen/check attack coords, if invalid gen new coords
 

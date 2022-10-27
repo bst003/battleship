@@ -160,6 +160,8 @@ export const Gameboard = () => {
 
         _addShipToBoard(ship.getCoords());
 
+        console.log(getShips().length);
+
         if (getShips().length === 5) {
             const data = {};
 

@@ -65,6 +65,22 @@ export const Gameboard = () => {
 
     const getShips = () => _ships;
 
+    const _genRandomCoordinates = () => {
+        const x = Math.floor(Math.random() * 10);
+        const y = Math.floor(Math.random() * 10);
+
+        return [x, y];
+    };
+
+    const _genRandomOrientation = () => {
+        const rand = Math.random();
+
+        if (rand < 0.5) {
+            return "vert";
+        }
+        return "hori";
+    };
+
     // Check if all ships are sunken
     const allShipsSunk = () => {
         const ships = getShips();
@@ -134,7 +150,7 @@ export const Gameboard = () => {
         const finalCoords = _generateAllShipCoordinates(startPos, orientation, length);
 
         if (!_validPlaceCoords(finalCoords)) {
-            // console.error("Some of the coordinates are not valid");
+            console.error("Some of the coordinates are not valid");
             return;
         }
 
@@ -142,6 +158,33 @@ export const Gameboard = () => {
         _ships.push(ship);
 
         _addShipToBoard(ship.getCoords());
+    };
+
+    const _placeCompShip = (startPos, orientation, length) => {
+        const finalCoords = _generateAllShipCoordinates(startPos, orientation, length);
+
+        if (!_validPlaceCoords(finalCoords)) {
+            console.error("Some of the random comp place coordinates are not valid");
+            const randomCoords = _genRandomCoordinates();
+            _placeCompShip(randomCoords, orientation, length);
+            return;
+        }
+
+        const ship = Ship(length, finalCoords);
+        _ships.push(ship);
+
+        _addShipToBoard(ship.getCoords());
+    };
+
+    // Will place all of the computer ships on the board
+    const placeAllComputerShips = () => {
+        const shipLengths = [5, 4, 3, 3, 2];
+
+        for (let i = 0; i < shipLengths.length; i++) {
+            const startPos = _genRandomCoordinates();
+            const orientation = _genRandomOrientation();
+            _placeCompShip(startPos, orientation, shipLengths[i]);
+        }
     };
 
     const _determineBoardMark = (coords) => {
@@ -238,6 +281,7 @@ export const Gameboard = () => {
         getShips,
         allShipsSunk,
         placeShip,
+        placeAllComputerShips,
         receiveAttack,
         validAttackCoords,
     };

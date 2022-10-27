@@ -1,3 +1,4 @@
+import { pubsub } from "./pubsub";
 import { Ship } from "./ship";
 /*
 
@@ -158,6 +159,14 @@ export const Gameboard = () => {
         _ships.push(ship);
 
         _addShipToBoard(ship.getCoords());
+
+        if (getShips().length === 5) {
+            const data = {};
+
+            data.board = getBoard();
+
+            pubsub.publish("renderBoard", data);
+        }
     };
 
     const _placeCompShip = (startPos, orientation, length) => {

@@ -191,6 +191,16 @@ export const Gameboard = (id = 0) => {
         _ships.push(ship);
 
         _addShipToBoard(ship.getCoords());
+
+        if (getShips().length === 5) {
+            console.log("test");
+            const data = {};
+
+            data.board = getBoard();
+            data.id = _getBoardID();
+
+            pubsub.publish("renderBoard", data);
+        }
     };
 
     // Will place all of the computer ships on the board
@@ -200,8 +210,15 @@ export const Gameboard = (id = 0) => {
         for (let i = 0; i < shipLengths.length; i++) {
             const startPos = _genRandomCoordinates();
             const orientation = _genRandomOrientation();
+
+            console.log(
+                `comp ship startPos: ${startPos}, orientation: ${orientation}, length: ${shipLengths[i]} `
+            );
+
             _placeCompShip(startPos, orientation, shipLengths[i]);
         }
+
+        console.log(`comp ships: ${getShips().length}`);
     };
 
     const _determineBoardMark = (coords) => {

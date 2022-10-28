@@ -76,10 +76,10 @@ export const domFunctions = (() => {
             `.board[data-id="${boardID}"] .board-cell[data-coord-x="${posX}"][data-coord-y="${posY}"]`
         );
 
-        const cellClasses = cell.classList;
-        console.log(cellClasses);
+        const cellClasses = cell.className.split(" ");
+        const currentMarkClass = cellClasses[1];
 
-        console.log(cell);
+        cell.classList.remove(currentMarkClass);
         cell.classList.add(newCellClass);
     };
     pubsub.subscribe("renderAttack", renderAttack);

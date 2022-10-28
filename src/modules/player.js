@@ -81,6 +81,7 @@ export const Player = (id, activePlayer = false, getPlayersFunc = () => null, bo
 
         if (board.allShipsSunk()) {
             console.log("all ships are sunken, game over");
+            // Add pubsub to show winner via DOM
             return;
         }
 

@@ -33,13 +33,15 @@ player1Board.placeShip([0, 0], "hori", 2);
 const player2Board = player2.getPlayerBoard();
 player2Board.placeAllComputerShips();
 
-player2.attack(player1, [9, 9]);
-player2.attack(player1, [0, 0]);
-player2.attack(player1, [1, 0]);
-player2.attack(player1, [0, 3]);
-player2.attack(player1, [0, 4]);
-player2.attack(player1, [0, 5]);
-player2.attack(player1, [0, 6]);
+player1.attack(player2, [9, 9]);
+
+// player2.attack(player1, [9, 9]);
+// player2.attack(player1, [0, 0]);
+// player2.attack(player1, [1, 0]);
+// player2.attack(player1, [0, 3]);
+// player2.attack(player1, [0, 4]);
+// player2.attack(player1, [0, 5]);
+// player2.attack(player1, [0, 6]);
 
 /*
 

@@ -21,6 +21,9 @@ player1Board.placeShip([2, 2], "hori", 3);
 player1Board.placeShip([6, 9], "hori", 3);
 player1Board.placeShip([0, 0], "hori", 2);
 
+player2.attack(player1, [9, 9]);
+player2.attack(player1, [0, 0]);
+
 /*
 
 CREATE SOME SORT OF SHARED METHODS AREA

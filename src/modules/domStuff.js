@@ -6,6 +6,14 @@ export const domFunctions = (() => {
             return "ship";
         }
 
+        if (cellValue === "x") {
+            return "miss";
+        }
+
+        if (cellValue === "h") {
+            return "hit";
+        }
+
         return "empty";
     };
 
@@ -13,6 +21,7 @@ export const domFunctions = (() => {
     // Which means player needs to pass ID into board
     const renderBoard = (data) => {
         if (!data.board) {
+            console.log("missing board");
             return;
         }
 
@@ -45,8 +54,31 @@ export const domFunctions = (() => {
 
         boardsContain.appendChild(board);
     };
-
     pubsub.subscribe("renderBoard", renderBoard);
+
+    // Will need a board id and the coords
+    const renderAttack = (data) => {
+        console.log("is this running?");
+        if (!data.coords || !data.mark) {
+            console.log("missing attack data");
+            return;
+        }
+
+        const posX = data.coords[0];
+        const posY = data.coords[1];
+
+        const boardID = data.id;
+
+        const newCellClass = _determineCellClass(data.mark);
+
+        const cell = document.querySelector(
+            `.board[data-id="${boardID}"] .board-cell[data-coord-x="${posX}"][data-coord-y="${posY}"]`
+        );
+
+        console.log(cell);
+        cell.classList.add(newCellClass);
+    };
+    pubsub.subscribe("renderAttack", renderAttack);
 
     return {};
 })();

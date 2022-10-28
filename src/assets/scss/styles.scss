@@ -34,9 +34,17 @@ h1{
     .board-cell{
         padding-bottom: 100%;
         border: 1px solid #000;
-        
+
         &.ship{
             background-color: wheat;
+        }
+
+        &.miss{
+            background-color: rgba(0,0,0,0.6);
+        }
+
+        &.hit{
+            background-color: red;
         }
 
     }

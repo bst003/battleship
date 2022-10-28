@@ -167,6 +167,7 @@ export const Gameboard = (id = 0) => {
         console.log(getShips().length);
 
         if (getShips().length === 5) {
+            console.log("test");
             const data = {};
 
             data.board = getBoard();
@@ -281,6 +282,14 @@ export const Gameboard = (id = 0) => {
         const currentMark = _determineBoardMark(coords);
         // console.log(currentMark);
         _board[posY][posX] = currentMark;
+
+        const data = {};
+
+        data.mark = currentMark;
+        data.coords = coords;
+        data.id = _getBoardID();
+
+        pubsub.publish("renderAttack", data);
 
         if (_missedAttack(prevMark, currentMark)) {
             _missedAttacks++;

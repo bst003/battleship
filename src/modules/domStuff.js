@@ -45,8 +45,8 @@ export const domFunctions = (() => {
 
                 const cell = document.createElement("div");
                 cell.classList.add("board-cell", cellClass);
-                cell.setAttribute("data-coord-x", i);
-                cell.setAttribute("data-coord-y", y);
+                cell.setAttribute("data-coord-x", y);
+                cell.setAttribute("data-coord-y", i);
 
                 board.appendChild(cell);
             }
@@ -58,7 +58,6 @@ export const domFunctions = (() => {
 
     // Will need a board id and the coords
     const renderAttack = (data) => {
-        console.log("is this running?");
         if (!data.coords || !data.mark) {
             console.log("missing attack data");
             return;
@@ -76,6 +75,9 @@ export const domFunctions = (() => {
         const cell = document.querySelector(
             `.board[data-id="${boardID}"] .board-cell[data-coord-x="${posX}"][data-coord-y="${posY}"]`
         );
+
+        const cellClasses = cell.classList;
+        console.log(cellClasses);
 
         console.log(cell);
         cell.classList.add(newCellClass);

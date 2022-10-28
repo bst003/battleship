@@ -175,7 +175,7 @@ test("Ensure board is properly marking misses", () => {
         ["", "", "s", "", "", "", "", "", "", ""],
         ["", "", "s", "", "", "", "", "", "", ""],
         ["", "", "", "", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "x", "", "", ""],
+        ["", "", "", "", "x", "", "", "", "", ""],
         ["", "", "", "", "", "", "", "", "", ""],
         ["", "", "", "", "", "", "", "", "", ""],
         ["", "", "", "", "", "", "", "", "", ""],
@@ -185,7 +185,7 @@ test("Ensure board is properly marking misses", () => {
 
     testBoard.placeShip([2, 0], "vert", 5);
 
-    testBoard.receiveAttack([6, 6]);
+    testBoard.receiveAttack([4, 6]);
 
     const boardArray = testBoard.getBoard();
 

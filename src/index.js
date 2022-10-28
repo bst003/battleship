@@ -23,6 +23,11 @@ player1Board.placeShip([0, 0], "hori", 2);
 
 player2.attack(player1, [9, 9]);
 player2.attack(player1, [0, 0]);
+player2.attack(player1, [1, 0]);
+player2.attack(player1, [3, 0]);
+player2.attack(player1, [4, 0]);
+player2.attack(player1, [5, 0]);
+player2.attack(player1, [6, 0]);
 
 /*
 

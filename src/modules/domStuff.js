@@ -67,6 +67,8 @@ export const domFunctions = (() => {
         const posX = data.coords[0];
         const posY = data.coords[1];
 
+        console.log(`coords: ${posX}, ${posY} : mark: ${data.mark}`);
+
         const boardID = data.id;
 
         const newCellClass = _determineCellClass(data.mark);

@@ -42,7 +42,7 @@ receiveAttack step by step
         return error message
 
 */
-export const Gameboard = () => {
+export const Gameboard = (id = 0) => {
     const _board = [
         ["", "", "", "", "", "", "", "", "", ""],
         ["", "", "", "", "", "", "", "", "", ""],
@@ -56,11 +56,15 @@ export const Gameboard = () => {
         ["", "", "", "", "", "", "", "", "", ""],
     ];
 
+    const _boardID = id;
+
     let _missedAttacks = 0;
 
     const _ships = [];
 
     const getBoard = () => _board;
+
+    const _getBoardID = () => _boardID;
 
     const getMissedAttacks = () => _missedAttacks;
 
@@ -166,6 +170,7 @@ export const Gameboard = () => {
             const data = {};
 
             data.board = getBoard();
+            data.id = _getBoardID();
 
             pubsub.publish("renderBoard", data);
         }

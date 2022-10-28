@@ -18,7 +18,7 @@ const player1Board = player1.getPlayerBoard();
 player1Board.placeShip([4, 4], "vert", 5);
 player1Board.placeShip([0, 3], "vert", 4);
 player1Board.placeShip([2, 2], "hori", 3);
-player1Board.placeShip([2, 9], "hori", 3);
+player1Board.placeShip([6, 9], "hori", 3);
 player1Board.placeShip([0, 0], "hori", 2);
 
 /*

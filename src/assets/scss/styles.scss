@@ -4,6 +4,7 @@ html{
 
 body{
     font-family: 'Heebo', sans-serif;
+    padding: 0px 20px;
 }
 
 h1{
@@ -14,4 +15,30 @@ h1{
     margin: 0 auto;
     max-width: 1200px;
     width: 100%;
+}
+
+// Boards
+/////////////////////////////////////////
+
+#boards-contain{
+    display: flex;
+    justify-content: space-between;
+    gap: 2%;}
+
+.board{
+    width: 49%;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    border: 1px solid #000;
+
+    .board-cell{
+        padding-bottom: 100%;
+        border: 1px solid #000;
+        
+        &.ship{
+            background-color: wheat;
+        }
+
+    }
+
 }

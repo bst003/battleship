@@ -32,7 +32,7 @@ export const Player = (id, activePlayer = false, getPlayersFunc = () => null, bo
 
     const _isPlayerBot = botMode;
 
-    const _playerBoard = Gameboard();
+    const _playerBoard = Gameboard(id);
 
     const _playerID = id;
 

@@ -24,26 +24,27 @@ export const domFunctions = (() => {
         return Number(0);
     };
 
-    const _attackCell = (e) => {
-        console.log("did this work");
+    const _getCellBoardPlayerID = (cell) => {
+        const board = cell.parentElement;
+        return board.getAttribute("data-id");
+    };
 
-        console.log(e);
-
-        const cell = e.currentTarget;
-        cell.removeEventListener("click", _attackCell);
-
+    const _getCellCoords = (cell) => {
         const posX = Number(cell.getAttribute("data-coord-x"));
         const posY = Number(cell.getAttribute("data-coord-y"));
 
-        const coords = [posX, posY];
+        return [posX, posY];
+    };
 
-        const board = cell.parentElement;
-        const playerID = board.getAttribute("data-id");
+    const _attackCell = (e) => {
+        const cell = e.currentTarget;
+        cell.removeEventListener("click", _attackCell);
+
+        const coords = _getCellCoords(cell);
+
+        const playerID = _getCellBoardPlayerID(cell);
 
         const attackingPlayerID = _determineAttackingPlayerID(playerID);
-
-        console.log(playerID);
-        console.log(attackingPlayerID);
 
         const players = pubsub.pull("domGetPlayers")[0];
 

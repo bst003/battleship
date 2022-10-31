@@ -1,4 +1,6 @@
 import { Gameboard } from "./gameboard";
+import { pubsub } from "./pubsub";
+
 /*
 
 ***How do I communicate that one player attacked another?
@@ -90,7 +92,7 @@ export const Player = (id, activePlayer = false, getPlayersFunc = () => null, bo
 
         // If playerObject is active and a bot
         if (playerObject.getPlayerActiveStatus() && playerObject.getPlayerBotStatus()) {
-            const players = getAllPlayers();
+            const players = pubsub.pull("domGetPlayers")[0];
             const player1 = players[0];
 
             const attackCoords = _genComputerAttackCoords(player1);

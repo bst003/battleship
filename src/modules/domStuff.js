@@ -17,7 +17,7 @@ export const domFunctions = (() => {
         return "empty";
     };
 
-    const attackCell = (e) => {
+    const _attackCell = (e) => {
         console.log("did this work");
 
         console.log(e);
@@ -66,7 +66,7 @@ export const domFunctions = (() => {
                 cell.setAttribute("data-coord-x", y);
                 cell.setAttribute("data-coord-y", i);
 
-                cell.addEventListener("click", attackCell);
+                cell.addEventListener("click", _attackCell);
 
                 board.appendChild(cell);
             }

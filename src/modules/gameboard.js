@@ -155,7 +155,7 @@ export const Gameboard = (id = 0) => {
         const finalCoords = _generateAllShipCoordinates(startPos, orientation, length);
 
         if (!_validPlaceCoords(finalCoords)) {
-            console.error("Some of the coordinates are not valid");
+            // console.error("Some of the coordinates are not valid");
             return;
         }
 
@@ -181,7 +181,7 @@ export const Gameboard = (id = 0) => {
         const finalCoords = _generateAllShipCoordinates(startPos, orientation, length);
 
         if (!_validPlaceCoords(finalCoords)) {
-            console.error("Some of the random comp place coordinates are not valid");
+            // console.error("Some of the random comp place coordinates are not valid");
             const randomCoords = _genRandomCoordinates();
             _placeCompShip(randomCoords, orientation, length);
             return;
@@ -250,6 +250,8 @@ export const Gameboard = (id = 0) => {
                 const currentPosX = shipCoords[z][0];
                 const currentPosY = shipCoords[z][1];
 
+                console.log(`ship coords x: ${currentPosX}, ship coords y: ${currentPosY}`);
+
                 if (posX === currentPosX && posY === currentPosY) {
                     hitShip = ships[i];
                     break;
@@ -262,6 +264,8 @@ export const Gameboard = (id = 0) => {
 
     const _addHitToShip = (coords) => {
         const hitShip = _getHitShip(coords);
+        console.log(coords);
+        console.log(hitShip);
         hitShip.hit();
     };
 

@@ -17,22 +17,49 @@ export const domFunctions = (() => {
         return "empty";
     };
 
+    const _determineAttackingPlayerID = (receivingPlayerID) => {
+        if (receivingPlayerID === 0) {
+            return Number(1);
+        }
+        return Number(0);
+    };
+
     const _attackCell = (e) => {
         console.log("did this work");
 
         console.log(e);
 
         const cell = e.currentTarget;
-        cell.removeEventListener("click", attackCell);
+        cell.removeEventListener("click", _attackCell);
 
-        const posX = cell.getAttribute("data-coord-x");
-        const posY = cell.getAttribute("data-coord-y");
+        const posX = Number(cell.getAttribute("data-coord-x"));
+        const posY = Number(cell.getAttribute("data-coord-y"));
+
+        const coords = [posX, posY];
 
         const board = cell.parentElement;
-        const boardID = board.getAttribute("data-id");
+        const playerID = board.getAttribute("data-id");
+
+        const attackingPlayerID = _determineAttackingPlayerID(playerID);
+
+        console.log(playerID);
+        console.log(attackingPlayerID);
 
         const players = pubsub.pull("domGetPlayers")[0];
-        console.log(players);
+
+        const receivingPlayer = players[playerID];
+        const attackingPlayer = players[attackingPlayerID];
+
+        attackingPlayer.attack(receivingPlayer, coords);
+    };
+
+    const _createCell = (cellClass, posX, posY) => {
+        const cell = document.createElement("div");
+        cell.classList.add("board-cell", cellClass);
+        cell.setAttribute("data-coord-x", posX);
+        cell.setAttribute("data-coord-y", posY);
+
+        return cell;
     };
 
     // Will need to pass ID into this
@@ -56,15 +83,17 @@ export const domFunctions = (() => {
 
         for (let i = 0; i < boardArray.length; i++) {
             const subArray = boardArray[i];
-            for (let y = 0; y < subArray.length; y++) {
-                const cellValue = subArray[y];
+            for (let z = 0; z < subArray.length; z++) {
+                const cellValue = subArray[z];
 
                 const cellClass = _determineCellClass(cellValue);
 
-                const cell = document.createElement("div");
-                cell.classList.add("board-cell", cellClass);
-                cell.setAttribute("data-coord-x", y);
-                cell.setAttribute("data-coord-y", i);
+                const cell = _createCell(cellClass, z, i);
+
+                // const cell = document.createElement("div");
+                // cell.classList.add("board-cell", cellClass);
+                // cell.setAttribute("data-coord-x", z);
+                // cell.setAttribute("data-coord-y", i);
 
                 cell.addEventListener("click", _attackCell);
 

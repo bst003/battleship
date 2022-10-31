@@ -30,7 +30,7 @@ export const Gameloop = () => {
             activePlayer = true;
         }
 
-        const player = Player(id, activePlayer, getPlayers, botMode);
+        const player = Player(id, activePlayer, botMode);
 
         _players.push(player);
     };

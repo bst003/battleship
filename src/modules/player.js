@@ -29,7 +29,7 @@ Steps on Attack
         Make special function to run computer move
         Confirm compter move is valid
 */
-export const Player = (id, activePlayer = false, getPlayersFunc = () => null, botMode = false) => {
+export const Player = (id, activePlayer = false, botMode = false) => {
     let _isActivePlayer = activePlayer;
 
     const _isPlayerBot = botMode;
@@ -37,8 +37,6 @@ export const Player = (id, activePlayer = false, getPlayersFunc = () => null, bo
     const _playerBoard = Gameboard(id);
 
     const _playerID = id;
-
-    const getAllPlayers = () => getPlayersFunc();
 
     const getPlayerBoard = () => _playerBoard;
 
@@ -105,7 +103,6 @@ export const Player = (id, activePlayer = false, getPlayersFunc = () => null, bo
 
     return {
         attack,
-        getAllPlayers,
         getPlayerActiveStatus,
         getPlayerBotStatus,
         getPlayerBoard,

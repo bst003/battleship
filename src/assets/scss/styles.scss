@@ -35,8 +35,18 @@ h1{
         padding-bottom: 100%;
         border: 1px solid #000;
 
+        &.empty,
+        &.ship{
+            cursor: pointer;
+        }
+
         &.ship{
             background-color: wheat;
+        }
+
+        &.miss,
+        &.hit{
+            cursor: initial;
         }
 
         &.miss{

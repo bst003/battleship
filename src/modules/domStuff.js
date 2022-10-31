@@ -17,6 +17,24 @@ export const domFunctions = (() => {
         return "empty";
     };
 
+    const attackCell = (e) => {
+        console.log("did this work");
+
+        console.log(e);
+
+        const cell = e.currentTarget;
+        cell.removeEventListener("click", attackCell);
+
+        const posX = cell.getAttribute("data-coord-x");
+        const posY = cell.getAttribute("data-coord-y");
+
+        const board = cell.parentElement;
+        const boardID = board.getAttribute("data-id");
+
+        const players = pubsub.pull("domGetPlayers")[0];
+        console.log(players);
+    };
+
     // Will need to pass ID into this
     // Which means player needs to pass ID into board
     const renderBoard = (data) => {
@@ -47,6 +65,8 @@ export const domFunctions = (() => {
                 cell.classList.add("board-cell", cellClass);
                 cell.setAttribute("data-coord-x", y);
                 cell.setAttribute("data-coord-y", i);
+
+                cell.addEventListener("click", attackCell);
 
                 board.appendChild(cell);
             }

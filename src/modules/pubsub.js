@@ -21,6 +21,15 @@ const pubsub = {
             });
         }
     },
+    pull(eventName, data) {
+        const returnData = [];
+        if (this.events[eventName]) {
+            this.events[eventName].forEach((fn) => {
+                returnData.push(fn(data));
+            });
+        }
+        return returnData;
+    },
 };
 
 export { pubsub };

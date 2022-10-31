@@ -35,6 +35,8 @@ export const Gameloop = () => {
         _players.push(player);
     };
 
+    pubsub.subscribe("domGetPlayers", getPlayers);
+
     return {
         addPlayer,
         getPlayers,

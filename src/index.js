@@ -7,8 +7,13 @@ import { pubsub } from "./modules/pubsub";
 
 /*
 
-CREATE SOME SORT OF SHARED METHODS AREA
-    BOTH PLAYER AND GAMEBOARD USE A METHOD NAMED _genRandomCoordinates()
+TODO
+    Implement drag and drop
+    Implement lightbox for dragging and dropping
+    Only add event listenrs if player ID is for player 2
+    Remove event listeners on game over
+
+    Add way to clear everything and play again
 
 */
 

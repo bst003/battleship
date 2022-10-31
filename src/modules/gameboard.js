@@ -211,9 +211,12 @@ export const Gameboard = (id = 0) => {
             const startPos = _genRandomCoordinates();
             const orientation = _genRandomOrientation();
 
+            /*
             console.log(
-                `comp ship startPos: ${startPos}, orientation: ${orientation}, length: ${shipLengths[i]} `
+                `comp ship startPos: ${startPos},
+                orientation: ${orientation}, length: ${shipLengths[i]} `
             );
+            */
 
             _placeCompShip(startPos, orientation, shipLengths[i]);
         }
@@ -249,8 +252,6 @@ export const Gameboard = (id = 0) => {
             for (let z = 0; z < shipCoords.length; z++) {
                 const currentPosX = shipCoords[z][0];
                 const currentPosY = shipCoords[z][1];
-
-                console.log(`ship coords x: ${currentPosX}, ship coords y: ${currentPosY}`);
 
                 if (posX === currentPosX && posY === currentPosY) {
                     hitShip = ships[i];

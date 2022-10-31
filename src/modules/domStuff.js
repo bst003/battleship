@@ -91,11 +91,6 @@ export const domFunctions = (() => {
 
                 const cell = _createCell(cellClass, z, i);
 
-                // const cell = document.createElement("div");
-                // cell.classList.add("board-cell", cellClass);
-                // cell.setAttribute("data-coord-x", z);
-                // cell.setAttribute("data-coord-y", i);
-
                 cell.addEventListener("click", _attackCell);
 
                 board.appendChild(cell);
@@ -105,6 +100,14 @@ export const domFunctions = (() => {
         boardsContain.appendChild(board);
     };
     pubsub.subscribe("renderBoard", renderBoard);
+
+    const _updateCellClass = (cell, newCellClass) => {
+        const cellClasses = cell.className.split(" ");
+        const currentMarkClass = cellClasses[1];
+
+        cell.classList.remove(currentMarkClass);
+        cell.classList.add(newCellClass);
+    };
 
     // Will need a board id and the coords
     const renderAttack = (data) => {
@@ -116,7 +119,7 @@ export const domFunctions = (() => {
         const posX = data.coords[0];
         const posY = data.coords[1];
 
-        console.log(`coords: ${posX}, ${posY} : mark: ${data.mark}`);
+        // console.log(`coords: ${posX}, ${posY} : mark: ${data.mark}`);
 
         const boardID = data.id;
 
@@ -126,11 +129,7 @@ export const domFunctions = (() => {
             `.board[data-id="${boardID}"] .board-cell[data-coord-x="${posX}"][data-coord-y="${posY}"]`
         );
 
-        const cellClasses = cell.className.split(" ");
-        const currentMarkClass = cellClasses[1];
-
-        cell.classList.remove(currentMarkClass);
-        cell.classList.add(newCellClass);
+        _updateCellClass(cell, newCellClass);
     };
     pubsub.subscribe("renderAttack", renderAttack);
 

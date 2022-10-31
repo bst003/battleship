@@ -1,5 +1,6 @@
 import { Gameboard } from "./gameboard";
 import { pubsub } from "./pubsub";
+// import { reusedMethods } from "./reusedMethods";
 
 export const Player = (id, activePlayer = false, botMode = false) => {
     let _isActivePlayer = activePlayer;
@@ -22,15 +23,10 @@ export const Player = (id, activePlayer = false, botMode = false) => {
         _isActivePlayer = _isActivePlayer !== true;
     };
 
-    const _genRandomCoordinates = () => {
-        const x = Math.floor(Math.random() * 10);
-        const y = Math.floor(Math.random() * 10);
-
-        return [x, y];
-    };
+    // const _genRandomCoordinates = () => reusedMethods.genRandomCoordinates();
 
     const _genComputerAttackCoords = (playerObject) => {
-        const randomCoords = _genRandomCoordinates();
+        const randomCoords = pubsub.pull("getRandomCoordinates")[0];
 
         const playerBoard = playerObject.getPlayerBoard();
 

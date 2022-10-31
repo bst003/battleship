@@ -29,13 +29,6 @@ export const Gameboard = (id = 0) => {
 
     const getShips = () => _ships;
 
-    const _genRandomCoordinates = () => {
-        const x = Math.floor(Math.random() * 10);
-        const y = Math.floor(Math.random() * 10);
-
-        return [x, y];
-    };
-
     const _genRandomOrientation = () => {
         const rand = Math.random();
 
@@ -138,7 +131,7 @@ export const Gameboard = (id = 0) => {
 
         if (!_validPlaceCoords(finalCoords)) {
             // console.error("Some of the random comp place coordinates are not valid");
-            const randomCoords = _genRandomCoordinates();
+            const randomCoords = pubsub.pull("getRandomCoordinates")[0];
             _placeCompShip(randomCoords, orientation, length);
             return;
         }
@@ -164,7 +157,7 @@ export const Gameboard = (id = 0) => {
         const shipLengths = [5, 4, 3, 3, 2];
 
         for (let i = 0; i < shipLengths.length; i++) {
-            const startPos = _genRandomCoordinates();
+            const startPos = pubsub.pull("getRandomCoordinates");
             const orientation = _genRandomOrientation();
 
             /*

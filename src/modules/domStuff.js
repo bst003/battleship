@@ -74,8 +74,6 @@ export const domFunctions = (() => {
         const boardArray = data.board;
         const boardID = data.id;
 
-        console.log(boardArray);
-
         const boardsContain = document.querySelector("#boards-contain");
 
         const board = document.createElement("div");

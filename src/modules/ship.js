@@ -1,8 +1,3 @@
-/*
-
-Need to add coordinates var (array) to Ship to store where the ship is placed
-
-*/
 export const Ship = (shipLength, coords) => {
     let _hits = 0;
     const _length = shipLength;

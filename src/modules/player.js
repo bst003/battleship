@@ -1,34 +1,6 @@
 import { Gameboard } from "./gameboard";
 import { pubsub } from "./pubsub";
 
-/*
-
-***How do I communicate that one player attacked another?
-    ***From the player level that is, receiveAttack handles it on a board level
-    ***Something with communicating via the ID (array position)
-
-***Set player mode for computer?
-    ***Have boolean to indicate if player is bot or not
-
-How do I switch between players after attack?
-    May have to wait until Gameloop is made to do that
-    Gameloop holds array of players?
-
-Steps on Attack
-    ***If cooordinates are NOT valid
-        ***return
-
-    ***Initiate receiveAttack on board
-
-    ***Check if game over has occurred
-
-    ***Toggle active status on player1 (ADD THIS PROPERTY TO PLAYER)
-    ***Toggle active status on player2
-
-    If active player is bot then gen random coordinates and attack with those.
-        Make special function to run computer move
-        Confirm compter move is valid
-*/
 export const Player = (id, activePlayer = false, botMode = false) => {
     let _isActivePlayer = activePlayer;
 

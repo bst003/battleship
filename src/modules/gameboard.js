@@ -1,47 +1,6 @@
 import { pubsub } from "./pubsub";
 import { Ship } from "./ship";
-/*
 
-The board will be visible on the front end
-    Should this be private?
-    Need to know where to show ships
-    Markers
-        use "s" in array for ship
-        "h" for hit ship
-        "x" for miss
-
-placeShip will take in coordinates (Array) and orientation (vert or hori)
-    Would also need to pass length
-    Will need to call Ship factory to generate ship
-        Should this be handled by another step and have the value passed in?
-        Store Ships in an array/object in Gameboard?
-    Will have to pass coords to ship after placing
-    TWO STEPS, FIRST CREATE SHIP AND THEN PLACE
-
-placeShips step by step
-    ***if base coordinates are valid
-        ***generate all coordinates
-            if all generated coordinates are valid (_verifyCoords)
-            AND NOT OCCUPIED BY OTHER SHIP!!!!
-                ***create ship with length and all coordinates passed in
-                ***Add marks to _board where ship is
-            ***if all generated coordinates are not valid
-                ***return error message
-    ***if base coordinates are not valid
-        ***return error message
-
-IMPLEMENT PUBSUB WHERE POSSIBLE
-
-receiveAttack step by step
-    if base coords are valid
-        if spot is empty then change spot to x
-            record misses
-        if spot is ship then change to h
-            Add hit to ship in question
-    if base coordinates are not valid
-        return error message
-
-*/
 export const Gameboard = (id = 0) => {
     const _board = [
         ["", "", "", "", "", "", "", "", "", ""],
@@ -164,10 +123,7 @@ export const Gameboard = (id = 0) => {
 
         _addShipToBoard(ship.getCoords());
 
-        console.log(getShips().length);
-
         if (getShips().length === 5) {
-            console.log("test");
             const data = {};
 
             data.board = getBoard();
@@ -193,7 +149,7 @@ export const Gameboard = (id = 0) => {
         _addShipToBoard(ship.getCoords());
 
         if (getShips().length === 5) {
-            console.log("test");
+            // console.log("test");
             const data = {};
 
             data.board = getBoard();
@@ -221,7 +177,7 @@ export const Gameboard = (id = 0) => {
             _placeCompShip(startPos, orientation, shipLengths[i]);
         }
 
-        console.log(`comp ships: ${getShips().length}`);
+        // console.log(`comp ships: ${getShips().length}`);
     };
 
     const _determineBoardMark = (coords) => {
@@ -265,8 +221,8 @@ export const Gameboard = (id = 0) => {
 
     const _addHitToShip = (coords) => {
         const hitShip = _getHitShip(coords);
-        console.log(coords);
-        console.log(hitShip);
+        // console.log(coords);
+        // console.log(hitShip);
         hitShip.hit();
     };
 

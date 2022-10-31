@@ -23,7 +23,18 @@ h1{
 #boards-contain{
     display: flex;
     justify-content: space-between;
-    gap: 2%;}
+    gap: 2%;
+
+    @media all and (max-width: 768px) {
+        flex-direction: column;
+        gap: 60px;
+    }
+
+    @media all and (max-width: 479px) {
+        gap: 30px;
+    }
+
+}
 
 .board{
     width: 49%;
@@ -57,6 +68,10 @@ h1{
             background-color: red;
         }
 
+    }
+
+    @media all and (max-width: 768px) {
+        width: 100%;
     }
 
 }

@@ -1,4 +1,7 @@
 import "./assets/scss/styles.scss";
+import "./assets/scss/modal.scss";
+
+import MicroModal from "micromodal";
 
 import { Gameloop } from "./modules/gameloop";
 import { domFunctions } from "./modules/domStuff";
@@ -9,6 +12,8 @@ import { pubsub } from "./modules/pubsub";
 
 TODO
     Implement drag and drop
+        https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API#define_a_drop_zone
+        https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_draganddrop
     Implement lightbox for dragging and dropping
     Only add event listenrs if player ID is for player 2
     Remove event listeners on game over
@@ -40,6 +45,8 @@ const player2Board = player2.getPlayerBoard();
 player2Board.placeAllComputerShips();
 
 player1.attack(player2, [9, 9]);
+
+MicroModal.init();
 
 // player2.attack(player1, [9, 9]);
 // player2.attack(player1, [0, 0]);

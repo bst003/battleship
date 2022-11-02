@@ -131,5 +131,44 @@ export const domFunctions = (() => {
     };
     pubsub.subscribe("renderAttack", renderAttack);
 
+    const _createModal = (modalID) => {
+        const modal = document.createElement("div");
+
+        modal.classList.add("modal", "micromodal-slide");
+        modal.setAttribute("id", modalID);
+        modal.setAttribute("aria-hidden", "true");
+
+        const modalOverlay = document.createElement("div");
+        modalOverlay.classList.add("modal__overlay");
+        modalOverlay.setAttribute("tabindex", "-1");
+
+        const modalContainer = document.createElement("div");
+        modalContainer.classList.add("modal__container");
+        modalContainer.setAttribute("role", "dialog");
+
+        const modalHeader = document.createElement("header");
+        modalHeader.classList.add("modal__header");
+        modalContainer.appendChild(modalHeader);
+
+        const modalContent = document.createElement("main");
+        modalContent.classList.add("modal__content");
+        modalContent.innerText = "this is a test";
+        modalContainer.appendChild(modalContent);
+
+        modalOverlay.appendChild(modalContainer);
+
+        modal.appendChild(modalOverlay);
+
+        return modal;
+    };
+
+    const renderModal = () => {
+        const modal = _createModal("test-modal");
+        const body = document.querySelector("#site-body");
+        body.appendChild(modal);
+        MicroModal.show("test-modal");
+    };
+    pubsub.subscribe("testModal", renderModal);
+
     return {};
 })();

@@ -42,6 +42,12 @@ h1{
     grid-template-columns: repeat(10, 1fr);
     border: 1px solid #000;
 
+    &[data-id="0"] {
+        .board-cell{
+            cursor: initial!important;
+        }
+    }
+
     .board-cell{
         padding-bottom: 100%;
         border: 1px solid #000;
@@ -58,6 +64,7 @@ h1{
         &.miss,
         &.hit{
             cursor: initial;
+
         }
 
         &.miss{

@@ -121,7 +121,10 @@ export const domFunctions = (() => {
 
                 const cell = _createCell(cellClass, z, i);
 
-                cell.addEventListener("click", _attackCell);
+                if (Number(boardID) === Number(1)) {
+                    console.log(`id is ${typeof boardID}`);
+                    cell.addEventListener("click", _attackCell);
+                }
 
                 board.appendChild(cell);
             }

@@ -116,14 +116,18 @@ export const Gameboard = (id = 0) => {
 
         _addShipToBoard(ship.getCoords());
 
-        if (getShips().length === 5) {
-            const data = {};
+        const data = {};
 
+        data.id = _getBoardID();
+
+        if (getShips().length === 1) {
             data.board = getBoard();
-            data.id = _getBoardID();
 
             pubsub.publish("renderBoard", data);
         }
+        data.shipCoords = finalCoords;
+
+        pubsub.publish("renderShip", data);
     };
 
     const _placeCompShip = (startPos, orientation, length) => {

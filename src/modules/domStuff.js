@@ -63,6 +63,38 @@ export const domFunctions = (() => {
         return cell;
     };
 
+    const _updateCellClass = (cell, newCellClass) => {
+        const cellClasses = cell.className.split(" ");
+        const currentMarkClass = cellClasses[1];
+
+        cell.classList.remove(currentMarkClass);
+        cell.classList.add(newCellClass);
+    };
+
+    const renderShip = (data) => {
+        if (!data.shipCoords) {
+            console.log("missing ship coords");
+            return;
+        }
+
+        const boardID = data.id;
+        const boardElement = document.querySelector(`.board[data-id="${boardID}"]`);
+
+        const coords = data.shipCoords;
+
+        for (let i = 0; i < coords.length; i++) {
+            const posX = coords[i][0];
+            const posY = coords[i][1];
+
+            const cell = boardElement.querySelector(
+                `.board-cell[data-coord-x="${posX}"][data-coord-y="${posY}`
+            );
+
+            _updateCellClass(cell, "ship");
+        }
+    };
+    pubsub.subscribe("renderShip", renderShip);
+
     // Will need to pass ID into this
     // Which means player needs to pass ID into board
     const renderBoard = (data) => {
@@ -98,14 +130,6 @@ export const domFunctions = (() => {
         boardsContain.appendChild(board);
     };
     pubsub.subscribe("renderBoard", renderBoard);
-
-    const _updateCellClass = (cell, newCellClass) => {
-        const cellClasses = cell.className.split(" ");
-        const currentMarkClass = cellClasses[1];
-
-        cell.classList.remove(currentMarkClass);
-        cell.classList.add(newCellClass);
-    };
 
     // Will need a board id and the coords
     const renderAttack = (data) => {

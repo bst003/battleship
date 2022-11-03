@@ -158,7 +158,7 @@ export const domFunctions = (() => {
     };
     pubsub.subscribe("renderAttack", renderAttack);
 
-    const _createModal = (modalID) => {
+    const _createModal = (modalID, heading = "") => {
         const modal = document.createElement("div");
 
         modal.classList.add("modal", "micromodal-slide");
@@ -175,6 +175,11 @@ export const domFunctions = (() => {
 
         const modalHeader = document.createElement("header");
         modalHeader.classList.add("modal__header");
+
+        const modalHeading = document.createElement("h2");
+        modalHeading.innerText = heading;
+        modalHeader.appendChild(modalHeading);
+
         modalContainer.appendChild(modalHeader);
 
         const modalContent = document.createElement("main");
@@ -189,13 +194,13 @@ export const domFunctions = (() => {
         return modal;
     };
 
-    const renderModal = () => {
-        const modal = _createModal("test-modal");
+    const renderPlacementModal = () => {
+        const modal = _createModal("placement-modal", "Time to Place Your Ships");
         const body = document.querySelector("#site-body");
         body.appendChild(modal);
-        MicroModal.show("test-modal");
+        MicroModal.show("placement-modal");
     };
-    pubsub.subscribe("testModal", renderModal);
+    pubsub.subscribe("testModal", renderPlacementModal);
 
     return {};
 })();

@@ -18,7 +18,6 @@ TODO
             --- Have all cells have empty class at first, then update when ships is placed on them.
 
     Implement lightbox for dragging and dropping
-    Only add event listenrs if player ID is for player 2
     Remove event listeners on game over
 
     Add way to clear everything and play again
@@ -51,7 +50,7 @@ player1.attack(player2, [9, 9]);
 
 MicroModal.init();
 
-// pubsub.publish("testModal");
+pubsub.publish("testModal");
 
 // player2.attack(player1, [9, 9]);
 // player2.attack(player1, [0, 0]);

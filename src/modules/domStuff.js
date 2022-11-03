@@ -63,6 +63,32 @@ export const domFunctions = (() => {
         return cell;
     };
 
+    const _createBoard = (boardArray, boardID) => {
+        const board = document.createElement("div");
+        board.classList.add("board");
+        board.setAttribute("data-id", boardID);
+
+        for (let i = 0; i < boardArray.length; i++) {
+            const subArray = boardArray[i];
+            for (let z = 0; z < subArray.length; z++) {
+                const cellValue = subArray[z];
+
+                const cellClass = _determineCellClass(cellValue);
+
+                const cell = _createCell(cellClass, z, i);
+
+                if (Number(boardID) === Number(1)) {
+                    console.log(`id is ${typeof boardID}`);
+                    cell.addEventListener("click", _attackCell);
+                }
+
+                board.appendChild(cell);
+            }
+        }
+
+        return board;
+    };
+
     const _updateCellClass = (cell, newCellClass) => {
         const cellClasses = cell.className.split(" ");
         const currentMarkClass = cellClasses[1];
@@ -108,27 +134,7 @@ export const domFunctions = (() => {
 
         const boardsContain = document.querySelector("#boards-contain");
 
-        const board = document.createElement("div");
-        board.classList.add("board");
-        board.setAttribute("data-id", boardID);
-
-        for (let i = 0; i < boardArray.length; i++) {
-            const subArray = boardArray[i];
-            for (let z = 0; z < subArray.length; z++) {
-                const cellValue = subArray[z];
-
-                const cellClass = _determineCellClass(cellValue);
-
-                const cell = _createCell(cellClass, z, i);
-
-                if (Number(boardID) === Number(1)) {
-                    console.log(`id is ${typeof boardID}`);
-                    cell.addEventListener("click", _attackCell);
-                }
-
-                board.appendChild(cell);
-            }
-        }
+        const board = _createBoard(boardArray, boardID);
 
         boardsContain.appendChild(board);
     };
@@ -198,9 +204,32 @@ export const domFunctions = (() => {
         const modal = _createModal("placement-modal", "Time to Place Your Ships");
         const body = document.querySelector("#site-body");
         body.appendChild(modal);
+
+        const players = pubsub.pull("domGetPlayers");
+        console.log(players);
+
+        const id = 0;
+        const boardArray = [
+            ["", "", "", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", "", "", ""],
+        ];
+
+        const boardElement = _createBoard(boardArray, id);
+        const modalContent = modal.querySelector(".modal__content");
+
+        modalContent.appendChild(boardElement);
+
         MicroModal.show("placement-modal");
     };
-    pubsub.subscribe("testModal", renderPlacementModal);
+    pubsub.subscribe("startGame", renderPlacementModal);
 
     return {};
 })();

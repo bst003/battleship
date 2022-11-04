@@ -64,23 +64,27 @@ export const Gameboard = (id = 0) => {
         }
     };
 
-    const _generateAllShipCoordinates = (startCoords, orientation, length) => {
+    // const _generateAllShipCoordinates = (startCoords, orientation, length) => {
+    const _generateAllShipCoordinates = (data) => {
         const finalCoords = [];
 
-        finalCoords.push(startCoords);
+        console.log(data);
 
-        for (let i = 0; i < length - 1; i++) {
+        finalCoords.push(data.startPos);
+
+        for (let i = 0; i < data.length - 1; i++) {
             let coord;
-            if (orientation === "vert") {
-                coord = [startCoords[0], startCoords[1] + (i + 1)];
+            if (data.orientation === "vert") {
+                coord = [Number(data.startPos[0]), Number(data.startPos[1]) + (i + 1)];
             } else {
-                coord = [startCoords[0] + (i + 1), startCoords[1]];
+                coord = [Number(data.startPos[0]) + (i + 1), Number(data.startPos[1])];
             }
             finalCoords.push(coord);
         }
 
         return finalCoords;
     };
+    pubsub.subscribe("getFinalShipCoords", _generateAllShipCoordinates);
 
     const _validPlaceCoords = (coordsArray) => {
         let valid = true;
@@ -104,7 +108,13 @@ export const Gameboard = (id = 0) => {
     // startCoords take an array with an x and y value
     // values for orientation are 'vert' or 'hori'
     const placeShip = (startPos, orientation, length) => {
-        const finalCoords = _generateAllShipCoordinates(startPos, orientation, length);
+        const coordsData = {
+            startPos,
+            orientation,
+            length,
+        };
+
+        const finalCoords = _generateAllShipCoordinates(coordsData);
 
         if (!_validPlaceCoords(finalCoords)) {
             // console.error("Some of the coordinates are not valid");
@@ -131,7 +141,13 @@ export const Gameboard = (id = 0) => {
     };
 
     const _placeCompShip = (startPos, orientation, length) => {
-        const finalCoords = _generateAllShipCoordinates(startPos, orientation, length);
+        const coordsData = {
+            startPos,
+            orientation,
+            length,
+        };
+
+        const finalCoords = _generateAllShipCoordinates(coordsData);
 
         if (!_validPlaceCoords(finalCoords)) {
             // console.error("Some of the random comp place coordinates are not valid");

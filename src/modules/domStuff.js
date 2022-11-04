@@ -200,6 +200,28 @@ export const domFunctions = (() => {
         return modal;
     };
 
+    const _showShipPlacement = (e) => {
+        const cell = e.currentTarget;
+
+        const posX = Number(cell.getAttribute("data-coord-x"));
+        const posY = Number(cell.getAttribute("data-coord-y"));
+
+        const startPos = [posX, posY];
+
+        // const finaCoords = _generateAllShipCoordinates(startPos, "hori", 5);
+        const finalCoordsData = {
+            startPos,
+            orientation: "hori",
+            length: 5,
+        };
+        const finalCoords = pubsub.pull("getFinalShipCoords", finalCoordsData);
+
+        // Add class to items on hover
+        // Will have to remove them on mouseout unless ship is placed
+
+        console.log(finalCoords);
+    };
+
     const renderPlacementModal = () => {
         const modal = _createModal("placement-modal", "Time to Place Your Ships");
         const body = document.querySelector("#site-body");
@@ -223,6 +245,13 @@ export const domFunctions = (() => {
         ];
 
         const boardElement = _createBoard(boardArray, id);
+
+        const boardElementCells = boardElement.querySelectorAll(".board-cell");
+
+        boardElementCells.forEach((boardCell) => {
+            boardCell.addEventListener("mouseover", _showShipPlacement);
+        });
+
         const modalContent = modal.querySelector(".modal__content");
 
         modalContent.appendChild(boardElement);

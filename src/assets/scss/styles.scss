@@ -42,6 +42,10 @@ h1{
     grid-template-columns: repeat(10, 1fr);
     border: 1px solid #000;
 
+    .modal__content &{
+        width: 100%;
+    }
+
     &[data-id="0"] {
         .board-cell{
             cursor: initial!important;
@@ -79,6 +83,17 @@ h1{
 
     @media all and (max-width: 768px) {
         width: 100%;
+    }
+
+}
+
+// Custom Modals
+/////////////////////////////////////////
+ 
+#placement-modal{
+    
+    .modal__container {
+        min-width: 300px;
     }
 
 }

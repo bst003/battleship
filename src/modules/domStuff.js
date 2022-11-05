@@ -104,20 +104,22 @@ export const domFunctions = (() => {
         }
 
         const boardID = data.id;
-        const boardElement = document.querySelector(`.board[data-id="${boardID}"]`);
+        const boardElements = document.querySelectorAll(`.board[data-id="${boardID}"]`);
 
         const coords = data.shipCoords;
 
-        for (let i = 0; i < coords.length; i++) {
-            const posX = coords[i][0];
-            const posY = coords[i][1];
+        boardElements.forEach((boardElement) => {
+            for (let i = 0; i < coords.length; i++) {
+                const posX = coords[i][0];
+                const posY = coords[i][1];
 
-            const cell = boardElement.querySelector(
-                `.board-cell[data-coord-x="${posX}"][data-coord-y="${posY}`
-            );
+                const cell = boardElement.querySelector(
+                    `.board-cell[data-coord-x="${posX}"][data-coord-y="${posY}`
+                );
 
-            _updateCellClass(cell, "ship");
-        }
+                _updateCellClass(cell, "ship");
+            }
+        });
     };
     pubsub.subscribe("renderShip", renderShip);
 
@@ -205,37 +207,24 @@ export const domFunctions = (() => {
 
         const board = cell.parentElement;
 
-        const posX = Number(cell.getAttribute("data-coord-x"));
-        const posY = Number(cell.getAttribute("data-coord-y"));
+        const startPos = _getCellCoords(cell);
 
-        const startPos = [posX, posY];
-
-        // const finaCoords = _generateAllShipCoordinates(startPos, "hori", 5);
         const finalCoordsData = {
             startPos,
-            orientation: "hori",
+            orientation: board.getAttribute("data-orientation"),
             length: 5,
         };
         const finalCoords = pubsub.pull("getFinalShipCoords", finalCoordsData)[0];
 
-        console.log(finalCoords);
-
-        // Add class to items on hover
-        // Will have to remove them on mouseout unless ship is placed
-
         for (let i = 0; i < finalCoords.length; i++) {
-            const coordX = finalCoords[i][0];
-            const coordY = finalCoords[i][1];
-
-            console.log(`pox x: ${coordX}, pos y: ${coordY}`);
+            const posX = finalCoords[i][0];
+            const posY = finalCoords[i][1];
 
             const currentCell = board.querySelector(
-                `.board-cell[data-coord-x="${coordX}"][data-coord-y="${coordY}`
+                `.board-cell[data-coord-x="${posX}"][data-coord-y="${posY}`
             );
             currentCell.classList.add("place-hover");
         }
-
-        console.log(finalCoords);
     };
 
     const _removeShipPlacement = (e) => {
@@ -243,37 +232,41 @@ export const domFunctions = (() => {
 
         const board = cell.parentElement;
 
-        const posX = Number(cell.getAttribute("data-coord-x"));
-        const posY = Number(cell.getAttribute("data-coord-y"));
+        const startPos = _getCellCoords(cell);
 
-        const startPos = [posX, posY];
-
-        // const finaCoords = _generateAllShipCoordinates(startPos, "hori", 5);
         const finalCoordsData = {
             startPos,
-            orientation: "hori",
+            orientation: board.getAttribute("data-orientation"),
             length: 5,
         };
         const finalCoords = pubsub.pull("getFinalShipCoords", finalCoordsData)[0];
 
-        console.log(finalCoords);
-
-        // Add class to items on hover
-        // Will have to remove them on mouseout unless ship is placed
-
         for (let i = 0; i < finalCoords.length; i++) {
-            const coordX = finalCoords[i][0];
-            const coordY = finalCoords[i][1];
-
-            console.log(`pox x: ${coordX}, pos y: ${coordY}`);
+            const posX = finalCoords[i][0];
+            const posY = finalCoords[i][1];
 
             const currentCell = board.querySelector(
-                `.board-cell[data-coord-x="${coordX}"][data-coord-y="${coordY}`
+                `.board-cell[data-coord-x="${posX}"][data-coord-y="${posY}`
             );
             currentCell.classList.remove("place-hover");
         }
+    };
 
-        console.log(finalCoords);
+    const _placeShipOnClick = (e) => {
+        const cell = e.currentTarget;
+        const board = cell.parentElement;
+
+        const playerID = board.getAttribute("data-id");
+
+        const startPos = _getCellCoords(cell);
+        const orientation = board.getAttribute("data-orientation");
+        const length = 5;
+
+        const players = pubsub.pull("domGetPlayers")[0];
+
+        const playerBoard = players[playerID].getPlayerBoard();
+
+        playerBoard.placeShip(startPos, orientation, length);
     };
 
     const renderPlacementModal = () => {
@@ -299,12 +292,14 @@ export const domFunctions = (() => {
         ];
 
         const boardElement = _createBoard(boardArray, id);
+        boardElement.setAttribute("data-orientation", "hori");
 
         const boardElementCells = boardElement.querySelectorAll(".board-cell");
 
         boardElementCells.forEach((boardCell) => {
             boardCell.addEventListener("mouseover", _showShipPlacement);
             boardCell.addEventListener("mouseout", _removeShipPlacement);
+            boardCell.addEventListener("click", _placeShipOnClick);
         });
 
         const modalContent = modal.querySelector(".modal__content");

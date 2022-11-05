@@ -203,6 +203,8 @@ export const domFunctions = (() => {
     const _showShipPlacement = (e) => {
         const cell = e.currentTarget;
 
+        const board = cell.parentElement;
+
         const posX = Number(cell.getAttribute("data-coord-x"));
         const posY = Number(cell.getAttribute("data-coord-y"));
 
@@ -214,10 +216,62 @@ export const domFunctions = (() => {
             orientation: "hori",
             length: 5,
         };
-        const finalCoords = pubsub.pull("getFinalShipCoords", finalCoordsData);
+        const finalCoords = pubsub.pull("getFinalShipCoords", finalCoordsData)[0];
+
+        console.log(finalCoords);
 
         // Add class to items on hover
         // Will have to remove them on mouseout unless ship is placed
+
+        for (let i = 0; i < finalCoords.length; i++) {
+            const coordX = finalCoords[i][0];
+            const coordY = finalCoords[i][1];
+
+            console.log(`pox x: ${coordX}, pos y: ${coordY}`);
+
+            const currentCell = board.querySelector(
+                `.board-cell[data-coord-x="${coordX}"][data-coord-y="${coordY}`
+            );
+            currentCell.classList.add("place-hover");
+        }
+
+        console.log(finalCoords);
+    };
+
+    const _removeShipPlacement = (e) => {
+        const cell = e.currentTarget;
+
+        const board = cell.parentElement;
+
+        const posX = Number(cell.getAttribute("data-coord-x"));
+        const posY = Number(cell.getAttribute("data-coord-y"));
+
+        const startPos = [posX, posY];
+
+        // const finaCoords = _generateAllShipCoordinates(startPos, "hori", 5);
+        const finalCoordsData = {
+            startPos,
+            orientation: "hori",
+            length: 5,
+        };
+        const finalCoords = pubsub.pull("getFinalShipCoords", finalCoordsData)[0];
+
+        console.log(finalCoords);
+
+        // Add class to items on hover
+        // Will have to remove them on mouseout unless ship is placed
+
+        for (let i = 0; i < finalCoords.length; i++) {
+            const coordX = finalCoords[i][0];
+            const coordY = finalCoords[i][1];
+
+            console.log(`pox x: ${coordX}, pos y: ${coordY}`);
+
+            const currentCell = board.querySelector(
+                `.board-cell[data-coord-x="${coordX}"][data-coord-y="${coordY}`
+            );
+            currentCell.classList.remove("place-hover");
+        }
 
         console.log(finalCoords);
     };
@@ -250,6 +304,7 @@ export const domFunctions = (() => {
 
         boardElementCells.forEach((boardCell) => {
             boardCell.addEventListener("mouseover", _showShipPlacement);
+            boardCell.addEventListener("mouseout", _removeShipPlacement);
         });
 
         const modalContent = modal.querySelector(".modal__content");

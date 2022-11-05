@@ -79,6 +79,10 @@ h1{
             background-color: red;
         }
 
+        &.place-hover{
+            background-color: green;
+        }
+
     }
 
     @media all and (max-width: 768px) {

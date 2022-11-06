@@ -11,16 +11,15 @@ import { pubsub } from "./modules/pubsub";
 /*
 
 TODO
-    Implement drag and drop
-        https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API#define_a_drop_zone
-        https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_draganddrop
-        --- Refactor how ships are rendered to show even if number isn't five?
-            --- Have all cells have empty class at first, then update when ships is placed on them.
+    Remove modal event listeners on remove
 
-    Implement lightbox for dragging and dropping
-    Remove event listeners on game over
+    Remove board modals on game over
 
-    Add way to clear everything and play again
+    Add modal to replay game
+
+    Clear players list on game over
+
+    Update styling
 
 */
 
@@ -61,10 +60,3 @@ MicroModal.init();
 // player2.attack(player1, [0, 4]);
 // player2.attack(player1, [0, 5]);
 // player2.attack(player1, [0, 6]);
-
-/*
-
-CREATE SOME SORT OF SHARED METHODS AREA
-    BOTH PLAYER AND GAMEBOARD USE A METHOD NAMED _genRandomCoordinates()
-
-*/

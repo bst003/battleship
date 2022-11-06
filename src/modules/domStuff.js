@@ -78,7 +78,7 @@ export const domFunctions = (() => {
                 const cell = _createCell(cellClass, z, i);
 
                 if (Number(boardID) === Number(1)) {
-                    console.log(`id is ${typeof boardID}`);
+                    // console.log(`id is ${typeof boardID}`);
                     cell.addEventListener("click", _attackCell);
                 }
 
@@ -99,7 +99,7 @@ export const domFunctions = (() => {
 
     const renderShip = (data) => {
         if (!data.shipCoords) {
-            console.log("missing ship coords");
+            // console.log("missing ship coords");
             return;
         }
 
@@ -127,7 +127,7 @@ export const domFunctions = (() => {
     // Which means player needs to pass ID into board
     const renderBoard = (data) => {
         if (!data.board) {
-            console.log("missing board");
+            // console.log("missing board");
             return;
         }
 
@@ -145,7 +145,7 @@ export const domFunctions = (() => {
     // Will need a board id and the coords
     const renderAttack = (data) => {
         if (!data.coords || !data.mark) {
-            console.log("missing attack data");
+            // console.log("missing attack data");
             return;
         }
 
@@ -286,7 +286,6 @@ export const domFunctions = (() => {
         }
 
         shipLengthsArray.shift();
-        console.log(shipLengthsArray);
         board.setAttribute("data-ships", shipLengthsArray);
 
         const players = pubsub.pull("domGetPlayers")[0];

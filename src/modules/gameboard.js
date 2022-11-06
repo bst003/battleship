@@ -68,7 +68,7 @@ export const Gameboard = (id = 0) => {
     const _generateAllShipCoordinates = (data) => {
         const finalCoords = [];
 
-        console.log(data);
+        // console.log(data);
 
         finalCoords.push(data.startPos);
 

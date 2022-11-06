@@ -48,8 +48,11 @@ export const Player = (id, activePlayer = false, botMode = false) => {
         board.receiveAttack(coords);
 
         if (board.allShipsSunk()) {
+            const data = {};
+            data.winner = getPlayerID();
+
             console.log(`all ships are sunken, game over - player ${getPlayerID()} wins`);
-            pubsub.publish("gameOver");
+            pubsub.publish("gameOver", data);
             // Add pubsub to show winner via DOM
             return;
         }

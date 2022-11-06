@@ -12,7 +12,6 @@ export const domFunctions = (() => {
 
         _clearContent(boardsContain);
     };
-    pubsub.subscribe("gameOver", clearBoardsContain);
 
     const _determineCellClass = (cellValue) => {
         if (cellValue === "s") {
@@ -112,6 +111,7 @@ export const domFunctions = (() => {
         });
     };
     pubsub.subscribe("gameOver", removeCellListeners);
+    pubsub.subscribe("gameOver", clearBoardsContain);
 
     const _updateCellClass = (cell, newCellClass) => {
         const cellClasses = cell.className.split(" ");
@@ -419,6 +419,60 @@ export const domFunctions = (() => {
         MicroModal.show("placement-modal");
     };
     pubsub.subscribe("startGame", renderPlacementModal);
+
+    const _determineWinnerMessage = (winnerID) => {
+        if (Number(winnerID) === Number(0)) {
+            return "You win!";
+        }
+        return "The computer wins this round!";
+    };
+
+    const _renderWinnerMessage = (winnerID) => {
+        const message = document.createElement("p");
+        message.innerText = _determineWinnerMessage(winnerID);
+
+        return message;
+    };
+
+    const _restartGame = (e) => {
+        const button = e.currentTarget;
+
+        button.removeEventListener("click", _restartGame);
+
+        MicroModal.close("restart-modal");
+
+        _clearContent("#modals-contain");
+
+        pubsub.publish("startGame");
+    };
+
+    const _renderRestartButton = () => {
+        const button = document.createElement("button");
+        button.innerText = "Play Again";
+        button.classList.add("button");
+        button.setAttribute("id", "restart-button");
+        button.addEventListener("click", _restartGame);
+
+        return button;
+    };
+
+    const renderRestartModal = (data) => {
+        const modal = _createModal("restart-modal", "Game Over");
+        const modalsContain = document.querySelector("#modals-contain");
+        modalsContain.appendChild(modal);
+
+        const modalContent = modal.querySelector(".modal__content");
+
+        const modalMessage = _renderWinnerMessage(data.winner);
+
+        const restartButton = _renderRestartButton();
+
+        modalContent.appendChild(modalMessage);
+        modalContent.appendChild(restartButton);
+
+        MicroModal.show("restart-modal");
+    };
+    pubsub.subscribe("gameOver", renderRestartModal);
 
     return {};
 })();

@@ -15,9 +15,11 @@ TODO
 
     ***Remove board modals on ship placement
 
-    Add modal to replay game
+    ***Remove board elements on game over
 
-    Clear players list on game over
+    ***Add modal to replay game
+
+    ***Clear players list on game over
 
     Update styling
 

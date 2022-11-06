@@ -258,9 +258,26 @@ export const domFunctions = (() => {
 
         const playerID = board.getAttribute("data-id");
 
+        const shipLengthsString = board.getAttribute("data-ships");
+        const shipLengthsArray = shipLengthsString.split(",");
+
         const startPos = _getCellCoords(cell);
         const orientation = board.getAttribute("data-orientation");
-        const length = 5;
+        const length = shipLengthsArray[0];
+
+        const finalCoordsData = {
+            startPos,
+            orientation,
+            length,
+        };
+        const finalCoords = pubsub.pull("getFinalShipCoords", finalCoordsData)[0];
+
+        const validCoords = pubsub.pull("checkForValidCoords", finalCoords)[0];
+
+        if (!validCoords) {
+            console.log("invalid placement");
+            return;
+        }
 
         const players = pubsub.pull("domGetPlayers")[0];
 
@@ -290,6 +307,9 @@ export const domFunctions = (() => {
 
         const boardElement = _createBoard(boardArray, id);
         boardElement.setAttribute("data-orientation", "hori");
+
+        const shipLengths = [5, 4, 3, 3, 2];
+        boardElement.setAttribute("data-ships", shipLengths);
 
         const boardElementCells = boardElement.querySelectorAll(".board-cell");
 

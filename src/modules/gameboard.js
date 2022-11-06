@@ -104,6 +104,7 @@ export const Gameboard = (id = 0) => {
 
         return valid;
     };
+    pubsub.subscribe("checkForValidCoords", _validPlaceCoords);
 
     // startCoords take an array with an x and y value
     // values for orientation are 'vert' or 'hori'

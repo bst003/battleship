@@ -1,6 +1,12 @@
 import { pubsub } from "./pubsub";
 
 export const domFunctions = (() => {
+    const _clearContent = (parent) => {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+    };
+
     const _determineCellClass = (cellValue) => {
         if (cellValue === "s") {
             return "ship";
@@ -309,8 +315,11 @@ export const domFunctions = (() => {
             const data = {};
             data.boardElement = board;
 
+            const modalsContain = document.querySelector("#modals-contain");
+
             pubsub.publish("preBoardModalClose", data);
-            // MicroModal.close("placement-modal");
+            MicroModal.close("placement-modal");
+            _clearContent(modalsContain);
         }
     };
 
@@ -388,8 +397,8 @@ export const domFunctions = (() => {
 
     const renderPlacementModal = () => {
         const modal = _createModal("placement-modal", "Time to Place Your Ships");
-        const body = document.querySelector("#site-body");
-        body.appendChild(modal);
+        const modalsContain = document.querySelector("#modals-contain");
+        modalsContain.appendChild(modal);
 
         const modalContent = modal.querySelector(".modal__content");
 

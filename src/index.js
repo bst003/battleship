@@ -11,7 +11,7 @@ import { pubsub } from "./modules/pubsub";
 /*
 
 TODO
-    Remove modal event listeners on remove
+    ***Remove modal event listeners on remove
 
     Remove board modals on game over
 

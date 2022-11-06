@@ -306,7 +306,11 @@ export const domFunctions = (() => {
         playerBoard.placeShip(startPos, orientation, length);
 
         if (playerBoard.getShips().length === 5) {
-            MicroModal.close("placement-modal");
+            const data = {};
+            data.boardElement = board;
+
+            pubsub.publish("preBoardModalClose", data);
+            // MicroModal.close("placement-modal");
         }
     };
 
@@ -359,6 +363,28 @@ export const domFunctions = (() => {
 
         return button;
     };
+
+    const _removerOrientationToggleListener = () => {
+        const toggleButton = document.querySelector("#placement-modal .button");
+        toggleButton.removeEventListener("click", _toggleBoardOrientation);
+    };
+
+    const _removeModalCellListeners = (cells) => {
+        cells.forEach((cell) => {
+            cell.removeEventListener("mouseover", _showShipPlacement);
+            cell.removeEventListener("mouseout", _removeShipPlacement);
+            cell.removeEventListener("click", _placeShipOnClick);
+        });
+    };
+
+    const preBoardModalClose = (data) => {
+        const board = data.boardElement;
+        const cells = board.querySelectorAll(".board-cell");
+
+        _removeModalCellListeners(cells);
+        _removerOrientationToggleListener();
+    };
+    pubsub.subscribe("preBoardModalClose", preBoardModalClose);
 
     const renderPlacementModal = () => {
         const modal = _createModal("placement-modal", "Time to Place Your Ships");

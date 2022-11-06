@@ -209,10 +209,13 @@ export const domFunctions = (() => {
 
         const startPos = _getCellCoords(cell);
 
+        const shipLengthsString = board.getAttribute("data-ships");
+        const shipLengthsArray = shipLengthsString.split(",");
+
         const finalCoordsData = {
             startPos,
             orientation: board.getAttribute("data-orientation"),
-            length: 5,
+            length: shipLengthsArray[0],
         };
         const finalCoords = pubsub.pull("getFinalShipCoords", finalCoordsData)[0];
 
@@ -234,10 +237,13 @@ export const domFunctions = (() => {
 
         const startPos = _getCellCoords(cell);
 
+        const shipLengthsString = board.getAttribute("data-ships");
+        const shipLengthsArray = shipLengthsString.split(",");
+
         const finalCoordsData = {
             startPos,
             orientation: board.getAttribute("data-orientation"),
-            length: 5,
+            length: shipLengthsArray[0],
         };
         const finalCoords = pubsub.pull("getFinalShipCoords", finalCoordsData)[0];
 
@@ -278,6 +284,10 @@ export const domFunctions = (() => {
             console.log("invalid placement");
             return;
         }
+
+        shipLengthsArray.shift();
+        console.log(shipLengthsArray);
+        board.setAttribute("data-ships", shipLengthsArray);
 
         const players = pubsub.pull("domGetPlayers")[0];
 

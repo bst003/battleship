@@ -298,6 +298,24 @@ export const domFunctions = (() => {
         return boardElement;
     };
 
+    const _toggleBoardOrientation = (e) => {
+        const board = document.querySelector("#placement-modal .board");
+        const placeOrientation = board.getAttribute("data-orientation");
+
+        const newOrientation = placeOrientation === "vert" ? "hori" : "vert";
+
+        board.setAttribute("data-orientation", newOrientation);
+    };
+
+    const _renderOrientationSwitch = () => {
+        const button = document.createElement("button");
+        button.innerText = "Rotate Ship";
+        button.classList.add("button");
+        button.addEventListener("click", _toggleBoardOrientation);
+
+        return button;
+    };
+
     const renderPlacementModal = () => {
         const modal = _createModal("placement-modal", "Time to Place Your Ships");
         const body = document.querySelector("#site-body");
@@ -307,6 +325,9 @@ export const domFunctions = (() => {
 
         const boardElement = _renderModalBoard();
 
+        const orientationButton = _renderOrientationSwitch();
+
+        modalContent.appendChild(orientationButton);
         modalContent.appendChild(boardElement);
 
         MicroModal.show("placement-modal");

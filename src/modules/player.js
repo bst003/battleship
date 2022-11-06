@@ -13,6 +13,10 @@ export const Player = (id, activePlayer = false, botMode = false) => {
         _playerBoard = Gameboard(playerID);
     };
 
+    const removePlayerBoard = () => {
+        _playerBoard = null;
+    };
+
     const _playerID = id;
 
     const getPlayerBoard = () => _playerBoard;
@@ -55,9 +59,13 @@ export const Player = (id, activePlayer = false, botMode = false) => {
             const data = {};
             data.winner = getPlayerID();
 
-            console.log(`all ships are sunken, game over - player ${getPlayerID()} wins`);
+            console.log(`game is over, winner is ${getPlayerID()}`);
+
+            const players = pubsub.pull("domGetPlayers")[0];
+            removePlayerBoard();
+            players[1].removePlayerBoard();
+
             pubsub.publish("gameOver", data);
-            // Add pubsub to show winner via DOM
             return;
         }
 
@@ -80,6 +88,7 @@ export const Player = (id, activePlayer = false, botMode = false) => {
     return {
         attack,
         createPlayerBoard,
+        removePlayerBoard,
         getPlayerActiveStatus,
         getPlayerBotStatus,
         getPlayerBoard,

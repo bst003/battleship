@@ -316,9 +316,17 @@ export const domFunctions = (() => {
             orientation,
             length,
         };
-        const finalCoords = pubsub.pull("getFinalShipCoords", finalCoordsData)[0];
 
-        const validCoords = pubsub.pull("checkForValidCoords", finalCoords)[0];
+        const players = pubsub.pull("domGetPlayers")[0];
+        const playerBoard = players[playerID].getPlayerBoard();
+
+        const finalCoords = playerBoard.generateAllShipCoordinates(finalCoordsData);
+
+        const validCoords = playerBoard.validPlaceCoords(finalCoords);
+
+        // const finalCoords = pubsub.pull("getFinalShipCoords", finalCoordsData)[0];
+
+        // const validCoords = pubsub.pull("checkForValidCoords", finalCoords)[0];
 
         if (!validCoords) {
             console.log("invalid placement");
@@ -327,12 +335,6 @@ export const domFunctions = (() => {
 
         shipLengthsArray.shift();
         board.setAttribute("data-ships", shipLengthsArray);
-
-        const players = pubsub.pull("domGetPlayers")[0];
-
-        const playerBoard = players[playerID].getPlayerBoard();
-
-        console.log(playerBoard);
 
         playerBoard.placeShip(startPos, orientation, length);
 

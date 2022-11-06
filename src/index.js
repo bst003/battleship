@@ -13,7 +13,7 @@ import { pubsub } from "./modules/pubsub";
 TODO
     ***Remove modal event listeners on remove
 
-    Remove board modals on game over
+    ***Remove board modals on ship placement
 
     Add modal to replay game
 

@@ -4,6 +4,13 @@ import { pubsub } from "./pubsub";
 export const Gameloop = (() => {
     const _players = [];
 
+    const clearPlayers = () => {
+        for (let i = 0; i < _players.length; i++) {
+            _players.shift();
+        }
+    };
+    pubsub.subscribe("gameOver", clearPlayers);
+
     const getPlayers = () => _players;
     pubsub.subscribe("domGetPlayers", getPlayers);
 

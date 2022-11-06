@@ -7,6 +7,13 @@ export const domFunctions = (() => {
         }
     };
 
+    const clearBoardsContain = () => {
+        const boardsContain = document.querySelector("#boards-contain");
+
+        _clearContent(boardsContain);
+    };
+    pubsub.subscribe("gameOver", clearBoardsContain);
+
     const _determineCellClass = (cellValue) => {
         if (cellValue === "s") {
             return "ship";

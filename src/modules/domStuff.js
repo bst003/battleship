@@ -89,6 +89,17 @@ export const domFunctions = (() => {
         return board;
     };
 
+    const removeCellListeners = () => {
+        const board = document.querySelector(".board[data-id='1']");
+
+        const cells = board.querySelectorAll(".board-cell");
+
+        cells.forEach((cell) => {
+            cell.removeEventListener("click", _attackCell);
+        });
+    };
+    pubsub.subscribe("gameOver", removeCellListeners);
+
     const _updateCellClass = (cell, newCellClass) => {
         const cellClasses = cell.className.split(" ");
         const currentMarkClass = cellClasses[1];

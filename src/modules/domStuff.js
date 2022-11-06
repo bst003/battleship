@@ -269,14 +269,7 @@ export const domFunctions = (() => {
         playerBoard.placeShip(startPos, orientation, length);
     };
 
-    const renderPlacementModal = () => {
-        const modal = _createModal("placement-modal", "Time to Place Your Ships");
-        const body = document.querySelector("#site-body");
-        body.appendChild(modal);
-
-        const players = pubsub.pull("domGetPlayers");
-        console.log(players);
-
+    const _renderModalBoard = () => {
         const id = 0;
         const boardArray = [
             ["", "", "", "", "", "", "", "", "", ""],
@@ -302,7 +295,17 @@ export const domFunctions = (() => {
             boardCell.addEventListener("click", _placeShipOnClick);
         });
 
+        return boardElement;
+    };
+
+    const renderPlacementModal = () => {
+        const modal = _createModal("placement-modal", "Time to Place Your Ships");
+        const body = document.querySelector("#site-body");
+        body.appendChild(modal);
+
         const modalContent = modal.querySelector(".modal__content");
+
+        const boardElement = _renderModalBoard();
 
         modalContent.appendChild(boardElement);
 

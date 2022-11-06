@@ -55,6 +55,17 @@ export const Player = (id, activePlayer = false, botMode = false) => {
 
         board.receiveAttack(coords);
 
+        if (Number(getPlayerID()) === Number(1)) {
+            console.log("this is a computer turn");
+
+            const ships = board.getShips();
+
+            for (let i = 0; i < ships.length; i++) {
+                console.log(`${ships[i].getHits()} / ${ships[i].getLength()}`);
+                console.log(ships[i].isSunk());
+            }
+        }
+
         if (board.allShipsSunk()) {
             const data = {};
             data.winner = getPlayerID();
@@ -79,8 +90,7 @@ export const Player = (id, activePlayer = false, botMode = false) => {
 
             const attackCoords = _genComputerAttackCoords(player1);
 
-            // Create recurive method to gen/check attack coords, if invalid gen new coords
-
+            // console.log("computer is about to attack");
             playerObject.attack(player1, attackCoords);
         }
     };

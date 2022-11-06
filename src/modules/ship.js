@@ -7,12 +7,14 @@ export const Ship = (shipLength, coords) => {
 
     const getCoords = () => _coords;
 
+    const getLength = () => _length;
+
     const hit = () => {
         _hits++;
     };
 
     const isSunk = () => {
-        if (_hits === _length) {
+        if (Number(_hits) === Number(_length)) {
             return true;
         }
         return false;
@@ -21,6 +23,7 @@ export const Ship = (shipLength, coords) => {
     return {
         getCoords,
         getHits,
+        getLength,
         hit,
         isSunk,
     };

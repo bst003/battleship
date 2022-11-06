@@ -89,6 +89,11 @@ export const Gameboard = (id = 0) => {
     const _validPlaceCoords = (coordsArray) => {
         let valid = true;
 
+        if (Number(_boardID) === Number(0)) {
+            console.log(coordsArray);
+            console.log(_board);
+        }
+
         for (let i = 0; i < coordsArray.length; i++) {
             const posX = coordsArray[i][0];
             const posY = coordsArray[i][1];
@@ -121,6 +126,8 @@ export const Gameboard = (id = 0) => {
             // console.error("Some of the coordinates are not valid");
             return;
         }
+
+        console.log(_board);
 
         const ship = Ship(length, finalCoords);
         _ships.push(ship);

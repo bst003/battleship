@@ -8,6 +8,9 @@ export const Gameloop = (() => {
         for (let i = 0; i <= _players.length; i++) {
             _players.shift();
         }
+
+        console.log("players");
+        console.log(_players);
     };
     pubsub.subscribe("gameOver", clearPlayers);
 
@@ -32,13 +35,15 @@ export const Gameloop = (() => {
         addPlayer();
         addPlayer(true);
 
+        const player1 = getPlayers()[0];
         const player2 = getPlayers()[1];
+
+        player1.createPlayerBoard(0);
+        player2.createPlayerBoard(1);
 
         const player2Board = player2.getPlayerBoard();
 
         player2Board.placeAllComputerShips();
-
-        const player1 = getPlayers()[0];
 
         const player1Board = player1.getPlayerBoard();
 

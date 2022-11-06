@@ -250,7 +250,9 @@ export const domFunctions = (() => {
             const currentCell = board.querySelector(
                 `.board-cell[data-coord-x="${posX}"][data-coord-y="${posY}`
             );
-            currentCell.classList.add("place-hover");
+            if (currentCell) {
+                currentCell.classList.add("place-hover");
+            }
         }
     };
 
@@ -278,7 +280,10 @@ export const domFunctions = (() => {
             const currentCell = board.querySelector(
                 `.board-cell[data-coord-x="${posX}"][data-coord-y="${posY}`
             );
-            currentCell.classList.remove("place-hover");
+            if (currentCell) {
+                currentCell.classList.remove("place-hover");
+            }
+            // currentCell.classList.remove("place-hover");
         }
     };
 
@@ -326,6 +331,8 @@ export const domFunctions = (() => {
         const players = pubsub.pull("domGetPlayers")[0];
 
         const playerBoard = players[playerID].getPlayerBoard();
+
+        console.log(playerBoard);
 
         playerBoard.placeShip(startPos, orientation, length);
 

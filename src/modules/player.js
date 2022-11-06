@@ -7,7 +7,11 @@ export const Player = (id, activePlayer = false, botMode = false) => {
 
     const _isPlayerBot = botMode;
 
-    const _playerBoard = Gameboard(id);
+    let _playerBoard;
+
+    const createPlayerBoard = (playerID) => {
+        _playerBoard = Gameboard(playerID);
+    };
 
     const _playerID = id;
 
@@ -75,6 +79,7 @@ export const Player = (id, activePlayer = false, botMode = false) => {
 
     return {
         attack,
+        createPlayerBoard,
         getPlayerActiveStatus,
         getPlayerBotStatus,
         getPlayerBoard,

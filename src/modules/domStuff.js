@@ -282,6 +282,17 @@ export const domFunctions = (() => {
         }
     };
 
+    const _endGameAfterClick = (board) => {
+        const data = {};
+        data.boardElement = board;
+
+        const modalsContain = document.querySelector("#modals-contain");
+
+        pubsub.publish("preBoardModalClose", data);
+        MicroModal.close("placement-modal");
+        _clearContent(modalsContain);
+    };
+
     const _placeShipOnClick = (e) => {
         const cell = e.currentTarget;
         const board = cell.parentElement;
@@ -319,14 +330,7 @@ export const domFunctions = (() => {
         playerBoard.placeShip(startPos, orientation, length);
 
         if (playerBoard.getShips().length === 5) {
-            const data = {};
-            data.boardElement = board;
-
-            const modalsContain = document.querySelector("#modals-contain");
-
-            pubsub.publish("preBoardModalClose", data);
-            MicroModal.close("placement-modal");
-            _clearContent(modalsContain);
+            _endGameAfterClick(board);
         }
     };
 

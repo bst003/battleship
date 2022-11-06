@@ -192,7 +192,7 @@ export const domFunctions = (() => {
 
         const modalContent = document.createElement("main");
         modalContent.classList.add("modal__content");
-        modalContent.innerText = "this is a test";
+        // modalContent.innerText = "this is a test";
         modalContainer.appendChild(modalContent);
 
         modalOverlay.appendChild(modalContainer);
@@ -267,6 +267,10 @@ export const domFunctions = (() => {
         const playerBoard = players[playerID].getPlayerBoard();
 
         playerBoard.placeShip(startPos, orientation, length);
+
+        if (playerBoard.getShips().length === 5) {
+            MicroModal.close("placement-modal");
+        }
     };
 
     const _renderModalBoard = () => {

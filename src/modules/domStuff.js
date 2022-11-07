@@ -443,6 +443,7 @@ export const domFunctions = (() => {
 
     const _renderWinnerMessage = (winnerID) => {
         const message = document.createElement("p");
+        message.classList.add("win-message");
         message.innerText = _determineWinnerMessage(winnerID);
 
         return message;

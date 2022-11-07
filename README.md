@@ -9,4 +9,4 @@ The game works by setting up a GameLoop object and creating two players.
 Each player is then assigned a board object, which in turn is assigned five ship objects.
 The game then steps between turns until a player wins the game.
 
-<a href="#">View the live project</a>
+<a href="https://bst003.github.io/battleship/">View the live project</a>

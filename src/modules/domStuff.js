@@ -386,6 +386,7 @@ export const domFunctions = (() => {
 
     const _renderOrientationSwitch = () => {
         const button = document.createElement("button");
+        button.setAttribute("type", "button");
         button.innerText = "Rotate Ship";
         button.classList.add("button");
         button.addEventListener("click", _toggleBoardOrientation);
@@ -461,6 +462,7 @@ export const domFunctions = (() => {
 
     const _renderRestartButton = () => {
         const button = document.createElement("button");
+        button.setAttribute("type", "button");
         button.innerText = "Play Again";
         button.classList.add("button");
         button.setAttribute("id", "restart-button");
